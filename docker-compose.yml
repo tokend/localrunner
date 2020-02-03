@@ -194,21 +194,27 @@ services:
       - ./configs/poll-closer.yaml:/config.yaml
     command: run closer
   projects:
-    image: registry.gitlab.com/tokend/defarm/projects-svc:af3712ee31216966bba350706410f6ced3aba015
+    image: registry.gitlab.com/tokend/defarm/projects-svc:9b92e9ca1dd42cc390cc9f48efb3b263f6f541d2
     restart: unless-stopped
     labels:
       - "traefik.enabled=false"
     volumes:
-      - ./configs/projects.yaml:/config.yaml 
-      - projects-data:/data
+      - ./configs/projects.yaml:/config.yaml
     environment:
       - KV_VIPER_FILE=/config.yaml
+    entrypoint: sh -c "projects-svc migrate up && projects-svc run"
+  projects_db:
+    image: tokend/postgres-ubuntu:9.6
+    restart: unless-stopped
+    labels:
+      - "traefik.enabled=false"
+    environment:
       - POSTGRES_USER=projects
       - POSTGRES_PASSWORD=projects
       - POSTGRES_DB=projects
       - PGDATA=/data
-    command: "run"
-
+    volumes:
+      - projects-data:/data
   ## 3rd party
 
   autoheal:

@@ -3,7 +3,7 @@ log:
   level: debug
 
 db:
-  url: postgres://projects:projects@localhost/projects?sslmode=disable
+  url: postgres://projects:projects@projects_db/projects?sslmode=disable
 
 horizon:
   endpoint: http://traefik/
