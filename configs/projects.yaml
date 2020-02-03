@@ -1,0 +1,20 @@
+log:
+  disable_sentry: true
+  level: debug
+
+db:
+  url: postgres://projects:projects@localhost/projects?sslmode=disable
+
+horizon:
+  endpoint: http://traefik/
+  signer: SAMJKTZVW5UOHCDK5INYJNORF2HRKYI72M5XSZCBYAHQHR34FFR4Z6G4
+
+listener:
+  addr: :8228
+
+cop:
+  endpoint: "http://cop"
+  upstream: "http://projects"
+  service_name: "projects-service"
+  service_port: "8228"
+  service_prefix: "/integrations/projects-svc"

@@ -193,6 +193,21 @@ services:
     volumes:
       - ./configs/poll-closer.yaml:/config.yaml
     command: run closer
+  projects:
+    image: registry.gitlab.com/tokend/defarm/projects-svc:af3712ee31216966bba350706410f6ced3aba015
+    restart: unless-stopped
+    labels:
+      - "traefik.enabled=false"
+    volumes:
+      - ./configs/projects.yaml:/config.yaml 
+      - projects-data:/data
+    environment:
+      - KV_VIPER_FILE=/config.yaml
+      - POSTGRES_USER=projects
+      - POSTGRES_PASSWORD=projects
+      - POSTGRES_DB=projects
+      - PGDATA=/data
+    command: "run"
 
   ## 3rd party
 
@@ -339,3 +354,4 @@ volumes:
   horizon-data:
   storage-data:
   redis-data:
+  projects-data:
