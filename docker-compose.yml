@@ -196,8 +196,6 @@ services:
   projects:
     image: registry.gitlab.com/tokend/defarm/projects-svc:9b92e9ca1dd42cc390cc9f48efb3b263f6f541d2
     restart: unless-stopped
-    labels:
-      - "traefik.enabled=false"
     volumes:
       - ./configs/projects.yaml:/config.yaml
     environment:
