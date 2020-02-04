@@ -10,11 +10,11 @@ horizon:
   signer: SAMJKTZVW5UOHCDK5INYJNORF2HRKYI72M5XSZCBYAHQHR34FFR4Z6G4
 
 listener:
-  addr: :8228
+  addr: :80
 
 cop:
   endpoint: "http://cop"
   upstream: "http://projects"
   service_name: "projects-service"
-  service_port: "8228"
+  service_port: "80"
   service_prefix: "/integrations/projects-svc"
