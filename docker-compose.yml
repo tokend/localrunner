@@ -114,7 +114,7 @@ services:
     volumes:
       - api-data:/pgdata
   initscripts:
-    image: tokend/terraform-provider-tokend:1.3.1-x.0
+    image: tokend/terraform-provider-tokend:1.3.1.1
     labels:
       - "traefik.enabled=false"
     depends_on:
@@ -256,22 +256,6 @@ services:
     volumes:
       - ./configs/coinpayments-withdraw.yaml:/config.yaml
     command: withdraw
-  coinpayments-atomic-swap-checker:
-    image: tokend/coinpayments:0.4.9-rc.0
-    restart: unless-stopped
-    environment:
-      - KV_VIPER_FILE=/config.yaml
-    volumes:
-      - ./configs/coinpayments-atomic-swap-checker.yaml:/config.yaml
-    command: atomic-swap-checker
-  coinpayments-atomic-swap-matcher:
-    image: tokend/coinpayments:0.4.9-rc.0
-    restart: unless-stopped
-    environment:
-      - KV_VIPER_FILE=/config.yaml
-    volumes:
-      - ./configs/coinpayments-atomic-swap-matcher.yaml:/config.yaml
-    command: atomic-swap-matcher
 
   ## Stellar
   stellar-deposit:
