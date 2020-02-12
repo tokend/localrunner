@@ -1,0 +1,27 @@
+log:
+  disable_sentry: true
+  level: debug
+
+client:
+  endpoint: http://traefik/
+
+submit:
+  endpoint: http://traefik/
+
+listener:
+  addr: :80
+
+keys:
+  source: GC6MQ5V2TOTHEBLIWK7XFRNUWSSG6O4Y5A6WC252XUF5OOC34A5XVR3N
+  signer: SDYMLR4DCDZI5NQBIO3M7H5UR43KEFJSWD5WZ3SCTCR243CLS6TH75W3
+
+service:
+  skip_sign_check: true
+
+cop:
+  endpoint: "http://cop"
+  upstream: "http://buyback"
+  service_name: "buy-back-service"
+  service_port: "80"
+  service_prefix: "/integrations/buyback"
+

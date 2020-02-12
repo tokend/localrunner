@@ -77,8 +77,11 @@ services:
     labels:
       - "autoheal=true"
       - "traefik.enabled=false"
+    ports:
+      - "8088:8080"
+      - "5433:5432"
   horizon:
-    image: registry.gitlab.com/tokend/horizon:pg-7df7b5c0eebb352417acd798b3b17c646d29203e
+    image: registry.gitlab.com/tokend/horizon:pg-5ae0fe157108c8939bdb4b0e49dcfcc6f10aca78
     depends_on:
       - core
     restart: unless-stopped
@@ -194,7 +197,7 @@ services:
       - ./configs/poll-closer.yaml:/config.yaml
     command: run closer
   projects:
-    image: registry.gitlab.com/tokend/defarm/projects-svc:9b92e9ca1dd42cc390cc9f48efb3b263f6f541d2
+    image: registry.gitlab.com/tokend/defarm/projects-svc:7a9b35a4962ef177e9122c1fc32b7f63921c8a73
     restart: unless-stopped
     volumes:
       - ./configs/projects.yaml:/config.yaml
@@ -213,6 +216,16 @@ services:
       - PGDATA=/data
     volumes:
       - projects-data:/data
+  buyback:
+    image: registry.gitlab.com/tokend/defarm/buy-back-svc:d655228042fc7343e221d74c7961cbfc55dae0f4
+    restart: unless-stopped
+    volumes:
+      - ./configs/buyback.yaml:/config.yaml
+    environment:
+      - KV_VIPER_FILE=/config.yaml
+    entrypoint: buy-back-svc
+    command: run
+
   ## 3rd party
 
   autoheal:
