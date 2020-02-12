@@ -197,7 +197,7 @@ services:
       - ./configs/poll-closer.yaml:/config.yaml
     command: run closer
   projects:
-    image: registry.gitlab.com/tokend/defarm/projects-svc:d8080688e4d9e367dfd3e1dd6ce8eabf2cb17ecf
+    image: registry.gitlab.com/tokend/defarm/projects-svc:94933742e0b67d8b387b3b414b490eb7636adafb
     restart: unless-stopped
     volumes:
       - ./configs/projects.yaml:/config.yaml
@@ -217,7 +217,7 @@ services:
     volumes:
       - projects-data:/data
   buyback:
-    image: registry.gitlab.com/tokend/defarm/buy-back-svc:8cd0a6a7362c0a2b276db67ae88774d72e843bac
+    image: registry.gitlab.com/tokend/defarm/buy-back-svc:f80f3691ff8bd637d83c455d153cd8d1726cf4d9
     restart: unless-stopped
     volumes:
       - ./configs/buyback.yaml:/config.yaml
