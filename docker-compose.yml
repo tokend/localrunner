@@ -197,7 +197,7 @@ services:
       - ./configs/poll-closer.yaml:/config.yaml
     command: run closer
   projects:
-    image: registry.gitlab.com/tokend/defarm/projects-svc:94933742e0b67d8b387b3b414b490eb7636adafb
+    image: registry.gitlab.com/tokend/defarm/projects-svc:0764af301ca4b2c77f4b1887919234b597b7ed1f
     restart: unless-stopped
     volumes:
       - ./configs/projects.yaml:/config.yaml
