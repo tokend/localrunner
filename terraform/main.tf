@@ -18,5 +18,5 @@ provider "tokend" {
 }
 
 module "tokend_vanilla" {
-  source = "git::https://github.com/tokend/terraform-tokend-vanilla.git?ref=475c188a415e183a07ffc7ebdd51779406f7e214"
+  source = "git::https://github.com/tokend/terraform-tokend-vanilla.git?ref=a0df44ed6d584e071ac9a6625a23dad7597f34f9"
 }

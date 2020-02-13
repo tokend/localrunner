@@ -217,7 +217,7 @@ services:
     volumes:
       - projects-data:/data
   buyback:
-    image: registry.gitlab.com/tokend/defarm/buy-back-svc:7569c7731253931def31a70893141b7519746036
+    image: registry.gitlab.com/tokend/defarm/buy-back-svc:75b66329d728499c555c113d42764fe0f4529018
     restart: unless-stopped
     volumes:
       - ./configs/buyback.yaml:/config.yaml
