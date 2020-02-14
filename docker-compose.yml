@@ -226,7 +226,7 @@ services:
     entrypoint: buy-back-svc
     command: run
   burn-closer:
-    image: registry.gitlab.com/tokend/defarm/burn-closer-svc:e39dec16d2597349f3415f90bb4e5635e1e3baad
+    image: registry.gitlab.com/tokend/defarm/burn-closer-svc:aa1c75bba37d5161e43762b6425a6eb7698e4dbf
     restart: unless-stopped
     volumes:
       - ./configs/burn-closer.yaml:/config.yaml
