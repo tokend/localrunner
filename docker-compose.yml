@@ -225,6 +225,15 @@ services:
       - KV_VIPER_FILE=/config.yaml
     entrypoint: buy-back-svc
     command: run
+  burn-closer:
+    image: registry.gitlab.com/tokend/defarm/burn-closer-svc:2243fd59715059861abe94d5927ea5c91ea1ecf9
+    restart: unless-stopped
+    volumes:
+      - ./configs/burn-closer.yaml:/config.yaml
+    environment:
+      - KV_VIPER_FILE=/config.yaml
+    entrypoint: burn-closer-svc
+    command: run
 
   ## 3rd party
 
