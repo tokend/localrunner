@@ -1,0 +1,24 @@
+log:
+  disable_sentry: true
+  level: debug
+
+listener:
+  addr: :80
+
+mercado:
+  endpoint: https://api.mercadopago.com
+  access_token: TEST-7492097937676279-021111-298b9ccec22d38ef60cddd37e561b4f1-522013668
+
+client:
+  endpoint: http://traefik/
+
+submit:
+  endpoint: http://traefik/
+
+cop:
+  endpoint: "http://cop"
+  upstream: "http://mercado"
+  service_name: "mercado-service"
+  service_port: "80"
+  service_prefix: "/integrations/mercado"
+
