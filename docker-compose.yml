@@ -279,7 +279,7 @@ services:
       - ./configs/coinpayments-withdraw.yaml:/config.yaml
     command: withdraw
   mercado:
-    image: registry.gitlab.com/tokend/defarm/mercado-svc:40fbcba79bc518d4a65794301be50d93517b0bc3
+    image: registry.gitlab.com/tokend/defarm/mercado-svc:f18f4ad7cc08099a7167d8b26821431b6f742ca2
     restart: unless-stopped
     volumes:
       - ./configs/mercado.yaml:/config.yaml

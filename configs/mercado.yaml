@@ -8,6 +8,7 @@ listener:
 mercado:
   endpoint: https://api.mercadopago.com
   access_token: TEST-7492097937676279-021111-298b9ccec22d38ef60cddd37e561b4f1-522013668
+  notification_domain: http://ac5064b1.ngrok.io
 
 client:
   endpoint: http://traefik/
