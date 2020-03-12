@@ -279,7 +279,7 @@ services:
       - ./configs/coinpayments-withdraw.yaml:/config.yaml
     command: withdraw
   mercado:
-    image: registry.gitlab.com/tokend/defarm/mercado-svc:ddf1a64bd216c1c20db45e3dce62303d9dbedf45
+    image: registry.gitlab.com/tokend/defarm/mercado-svc:a1f65d0a253d0d9b8d20dbdce0adbc1c42b9015c
     restart: unless-stopped
     volumes:
       - ./configs/mercado.yaml:/config.yaml
@@ -287,7 +287,8 @@ services:
       - KV_VIPER_FILE=/config.yaml
     entrypoint: mercado-svc
     command: run
-
+    depends_on:
+      - horizon
 
 volumes:
   adks-data:

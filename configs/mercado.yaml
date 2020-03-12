@@ -7,9 +7,12 @@ listener:
 
 mercado:
   endpoint: https://api.mercadopago.com
-  access_token: TEST-7492097937676279-021111-298b9ccec22d38ef60cddd37e561b4f1-522013668
-  notification_domain: http://ac5064b1.ngrok.io
-  success_url: http://localhost:8095
+  access_token: TEST-7492097937676279-030415-1a413db235ddae22e5771b33737d17e8-522013668
+  notification_domain: http://17d9465d.ngrok.io/_/api/
+  success_url: http://localhost:8061/dashboard
+  pending_url: http://localhost:8061
+  failure_url: http://localhost:8061
+  sandbox_mode: true
 
 client:
   endpoint: http://traefik/
