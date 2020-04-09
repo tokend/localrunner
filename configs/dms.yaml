@@ -1,0 +1,15 @@
+listener:
+  addr: :80
+
+log:
+  level: warn
+  disable_sentry: true
+
+horizon:
+  endpoint: http://janus
+  signer: SAMJKTZVW5UOHCDK5INYJNORF2HRKYI72M5XSZCBYAHQHR34FFR4Z6G4
+
+janus:
+  endpoint: http://janus:8000
+  upstream: http://dms
+  surname:  dms
