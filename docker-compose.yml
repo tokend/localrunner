@@ -43,7 +43,7 @@ services:
       - --appendonly
       - "yes"
   core:
-    image: tokend/core:3.6.3.1
+    image: registry.gitlab.com/tokend/core:pg-5dd6bfebb4151065f381efb56c1511e7f28e4b52
     depends_on:
       - janus
     restart: unless-stopped
@@ -60,7 +60,7 @@ services:
     labels:
       - "autoheal=true"
   horizon:
-    image: tokend/horizon:3.7.1.1
+    image: registry.gitlab.com/tokend/horizon:pg-2d3d569ff434c26eeaad2b3a058d89b5cbdd4095
     depends_on:
       - core
     restart: unless-stopped
@@ -129,39 +129,6 @@ services:
     volumes:
       - storage-data:/data
 
-  ##
-  ## Auxiliary modules
-  ##
-
-  charts:
-    image: tokend/charts:0.4.1
-    restart: unless-stopped
-    environment:
-      - KV_VIPER_FILE=/config.yaml
-    volumes:
-      - ./configs/charts.yaml:/config.yaml
-    ports:
-      - 8080:8080
-    command: run
-  salecloser:
-    image: tokend/sale-closer-svc:1.0.1
-    depends_on:
-      - horizon
-    restart: unless-stopped
-    volumes:
-      - ./configs/salecloser.yaml:/config.yaml
-    environment:
-      - KV_VIPER_FILE=/config.yaml
-    command: "run"
-  poll_closer:
-    image: tokend/poll-closer:0.1.1
-    restart: unless-stopped
-    environment:
-      - KV_VIPER_FILE=/config.yaml
-    volumes:
-      - ./configs/poll-closer.yaml:/config.yaml
-    command: run closer
-
   ## 3rd party
 
   autoheal:
@@ -172,120 +139,7 @@ services:
       - AUTOHEAL_DEFAULT_STOP_TIMEOUT=30
     volumes:
       - /var/run/docker.sock:/var/run/docker.sock
-
-  ##
-  ## Integration services
-  ##
-
-  ## Coinpayments
-
-  coinpayments-deposit:
-    image: tokend/coinpayments:0.4.0
-    restart: unless-stopped
-    environment:
-      - KV_VIPER_FILE=/config.yaml
-    volumes:
-      - ./configs/coinpayments-deposit.yaml:/config.yaml
-    command: deposit
-  coinpayments-deposit-verify:
-    image: tokend/coinpayments:0.4.0
-    restart: unless-stopped
-    environment:
-      - KV_VIPER_FILE=/config.yaml
-    volumes:
-      - ./configs/coinpayments-deposit-verify.yaml:/config.yaml
-    command: deposit-verify
-  coinpayments-withdraw:
-    image: tokend/coinpayments:0.4.0
-    restart: unless-stopped
-    environment:
-      - KV_VIPER_FILE=/config.yaml
-    volumes:
-      - ./configs/coinpayments-withdraw.yaml:/config.yaml
-    command: withdraw
-  coinpayments-atomic-swap-checker:
-    image: tokend/coinpayments:0.4.5
-    restart: unless-stopped
-    environment:
-      - KV_VIPER_FILE=/config.yaml
-    volumes:
-      - ./configs/coinpayments-atomic-swap-checker.yaml:/config.yaml
-    command: atomic-swap-checker
-  coinpayments-atomic-swap-matcher:
-    image: tokend/coinpayments:0.4.5
-    restart: unless-stopped
-    environment:
-      - KV_VIPER_FILE=/config.yaml
-    volumes:
-      - ./configs/coinpayments-atomic-swap-matcher.yaml:/config.yaml
-    command: atomic-swap-matcher
-
-  ## Stellar
-  stellar-deposit:
-    image: tokend/stellar-deposit-svc:1.0.5
-    restart: unless-stopped
-    depends_on:
-      - horizon
-    environment:
-      - KV_VIPER_FILE=/config.yaml
-    volumes:
-      - ./configs/stellar-deposit.yaml:/config.yaml
-  stellar-withdraw:
-    image: tokend/stellar-withdraw-svc:1.0.1
-    restart: unless-stopped
-    depends_on:
-      - horizon
-    environment:
-      - KV_VIPER_FILE=/config.yaml
-    volumes:
-      - ./configs/stellar-withdraw.yaml:/config.yaml
-
-  ## Ethereum
-  erc20-deposit:
-    image: tokend/erc20-deposit-svc:1.0.8
-    restart: unless-stopped
-    depends_on:
-      - horizon
-    environment:
-      - KV_VIPER_FILE=/config.yaml
-    volumes:
-      - ./configs/erc20-deposit.yaml:/config.yaml
-    entrypoint: "erc20-deposit-svc"
-    command: ["run", "deposit"]
-  erc20-deployer:
-    image: tokend/erc20-deposit-svc:1.0.8
-    restart: on-failure
-    depends_on:
-      - horizon
-    environment:
-      - KV_VIPER_FILE=/config.yaml
-    volumes:
-      - ./configs/erc20-deposit.yaml:/config.yaml
-    entrypoint: "erc20-deposit-svc"
-    command: ["run", "deployer"]
-  erc20-funnel:
-    image: tokend/erc20-deposit-svc:1.0.8
-    restart: unless-stopped
-    depends_on:
-      - horizon
-    environment:
-      - KV_VIPER_FILE=/config.yaml
-    volumes:
-      - ./configs/erc20-deposit.yaml:/config.yaml
-    entrypoint: "erc20-deposit-svc"
-    command: ["run", "funnel"]
-  erc20-withdraw:
-    image: tokend/erc20-withdraw-svc:1.0.5
-    restart: unless-stopped
-    depends_on:
-      - horizon
-    environment:
-      - KV_VIPER_FILE=/config.yaml
-    volumes:
-      - ./configs/erc20-withdraw.yaml:/config.yaml
-    entrypoint: "erc20-withdraw-svc"
-    command: ["run", "withdraw"]
-
+  
 volumes:
   adks-data:
   api-data:
