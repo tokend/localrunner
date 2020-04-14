@@ -1,12 +1,18 @@
 listener:
   addr: :80
 
+dms:
+  skip_sign_check: true
+
+db:
+  url: postgres://dms:dms@dms_db/dms?sslmode=disable
+
 log:
   level: warn
   disable_sentry: true
 
 horizon:
-  endpoint: http://janus
+  url: http://janus
   signer: SAMJKTZVW5UOHCDK5INYJNORF2HRKYI72M5XSZCBYAHQHR34FFR4Z6G4
 
 janus:

@@ -1,2 +1,3 @@
 terraform/.terraform
 .idea
+.DS_Store
