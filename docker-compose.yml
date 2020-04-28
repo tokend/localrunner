@@ -73,7 +73,7 @@ services:
       - ./configs/horizon.yaml:/config.yaml
       - horizon-data:/data
   dms:
-    image: registry.gitlab.com/tokend/dms/dms-svc:cca24fa82c6586636b477b9d576860106c9a0b17
+    image: registry.gitlab.com/tokend/dms/dms-svc:45a3ccba97a20f2fbac00ced18ad734764e6856a
     restart: unless-stopped
     depends_on:
       - horizon
@@ -125,14 +125,14 @@ services:
     entrypoint: ""
     command: /opt/config/apply.sh
   web_client:
-    image: tokend/web-client:1.10.3
+    image: registry.gitlab.com/tokend/dms/web-client-dms:e19fe5ba0de77aabad5967242269fed1f063b403
     restart: unless-stopped
     volumes:
       - ./configs/client.js:/usr/share/nginx/html/static/env.js
     ports:
       - 8060:80
   admin_client:
-    image: tokend/admin-client:1.10.1
+    image: registry.gitlab.com/tokend/dms/admin-panel-dms:52f88117c99c0862e6d536b90bd66c03d7c4c1fd
     restart: unless-stopped
     volumes:
       - ./configs/client.js:/usr/share/nginx/html/static/env.js
