@@ -60,7 +60,7 @@ services:
     labels:
       - "autoheal=true"
   horizon:
-    image: registry.gitlab.com/tokend/horizon:pg-2d3d569ff434c26eeaad2b3a058d89b5cbdd4095
+    image: registry.gitlab.com/tokend/horizon:pg-133571e7cd149b4558777a2e63dc4eebe1cd39ed
     depends_on:
       - core
     restart: unless-stopped
