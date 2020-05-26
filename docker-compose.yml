@@ -60,7 +60,7 @@ services:
     labels:
       - "autoheal=true"
   horizon:
-    image: registry.gitlab.com/tokend/horizon:pg-133571e7cd149b4558777a2e63dc4eebe1cd39ed
+    image: registry.gitlab.com/tokend/horizon:pg-5184b2785ab68a61ee34d558fd812bd1bb5db94f
     depends_on:
       - core
     restart: unless-stopped
@@ -73,7 +73,7 @@ services:
       - ./configs/horizon.yaml:/config.yaml
       - horizon-data:/data
   dms:
-    image: registry.gitlab.com/tokend/dms/dms-svc:45a3ccba97a20f2fbac00ced18ad734764e6856a
+    image: registry.gitlab.com/tokend/dms/dms-svc:132ddb469866207dc4463510df3c7c5efc1be0ef
     restart: unless-stopped
     depends_on:
       - horizon
