@@ -132,7 +132,7 @@ services:
     ports:
       - 8060:80
   admin_client:
-    image: registry.gitlab.com/tokend/dms/admin-panel-dms:52f88117c99c0862e6d536b90bd66c03d7c4c1fd
+    image: registry.gitlab.com/tokend/dms/admin-panel-dms:6a761c745d84b0f28297a297f7a5ffd7e1160446
     restart: unless-stopped
     volumes:
       - ./configs/client.js:/usr/share/nginx/html/static/env.js
