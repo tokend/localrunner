@@ -73,7 +73,7 @@ services:
       - ./configs/horizon.yaml:/config.yaml
       - horizon-data:/data
   dms:
-    image: registry.gitlab.com/tokend/dms/dms-svc:0dbd134b3efe9251d26db2fa2653b39666cb33e9
+    image: registry.gitlab.com/tokend/dms/dms-svc:bfdf23f3756d4497b404c9c87ba552348a218d4d
     restart: unless-stopped
     depends_on:
       - horizon
