@@ -1,0 +1,23 @@
+log:
+  disable_sentry: true
+  level: info
+
+db:
+  url: postgres://invoices:invoices@invoices_db/invoices?sslmode=disable
+
+listener:
+  addr: :80
+
+submit:
+  endpoint: http://janus
+
+client:
+  endpoint: http://janus
+
+keys:
+  signer: SAMJKTZVW5UOHCDK5INYJNORF2HRKYI72M5XSZCBYAHQHR34FFR4Z6G4
+
+janus:
+  endpoint: http://janus:8000
+  upstream: http://invoices
+  surname:  invoices

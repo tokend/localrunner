@@ -93,6 +93,27 @@ services:
       - PGDATA=/pgdata
     volumes:
       - dms-data:/pgdata
+  invoices:
+    image: registry.gitlab.com/tokend/ims/invoices-svc:1.0.0
+    restart: unless-stopped
+    depends_on:
+      - horizon
+      - invoices_db
+    environment:
+      - KV_VIPER_FILE=/config.yaml
+    volumes:
+      - ./configs/invoices.yaml:/config.yaml
+    entrypoint: sh -c "invoices-svc migrate up && invoices-svc run service"
+  invoices_db:
+    image: tokend/postgres-ubuntu:9.6
+    restart: unless-stopped
+    environment:
+      - POSTGRES_USER=invoices
+      - POSTGRES_PASSWORD=invoices
+      - POSTGRES_DB=invoices
+      - PGDATA=/pgdata
+    volumes:
+      - invoices-data:/pgdata
   api:
     image: tokend/identity:4.5.4
     restart: unless-stopped
@@ -169,3 +190,4 @@ volumes:
   storage-data:
   redis-data:
   dms-data:
+  invoices-data:
