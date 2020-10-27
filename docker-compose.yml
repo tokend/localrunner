@@ -73,7 +73,7 @@ services:
       - ./configs/horizon.yaml:/config.yaml
       - horizon-data:/data
   dms:
-    image: registry.gitlab.com/tokend/dms/dms-svc:5d0a4bf7ba9065155d536b602a00d9a5d3820204
+    image: registry.gitlab.com/tokend/dms/dms-svc:28d5436d28751a8daa7458a04696e9393a12e938
     restart: unless-stopped
     depends_on:
       - horizon
@@ -181,7 +181,7 @@ services:
       - AUTOHEAL_DEFAULT_STOP_TIMEOUT=30
     volumes:
       - /var/run/docker.sock:/var/run/docker.sock
-  
+
 volumes:
   adks-data:
   api-data:
