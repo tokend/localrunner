@@ -137,7 +137,7 @@ services:
     entrypoint: ""
     command: /opt/config/apply.sh
   web_client:
-    image: registry.gitlab.com/tokend/blockparty/web-client:46c358ef61e8d16ff8a1ea1145beeb09c279b2a0
+    image: registry.gitlab.com/tokend/blockparty/web-client:1028884756e512d9d1d98274f29bf0f13fae4b5e
     restart: unless-stopped
     labels:
       - "traefik.enabled=false"
@@ -229,7 +229,7 @@ services:
       - ./configs/poll-closer.yaml:/config.yaml
     command: run closer
   marketplace:
-    image: registry.gitlab.com/tokend/marketplace-svc:4e1dda4ceb000438be0de5566763fe3da00ab1bd
+    image: mymarket:latest
     restart: unless-stopped
     environment:
       - KV_VIPER_FILE=/config.yaml
@@ -551,7 +551,6 @@ services:
       - PGDATA=/pgdata
     volumes:
       - notificator-data:/pgdata
-
 volumes:
   identity-data:
   adks-data:
