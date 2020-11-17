@@ -1,5 +1,5 @@
 rpc:
-  endpoint: "ws://63.32.188.217:8545"
+  endpoint: "ws://63.32.188.217:8546"
 
 ethereum:
   checkpoint: 8882144 #block to start listening for deposits from
