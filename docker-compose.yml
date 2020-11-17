@@ -137,7 +137,7 @@ services:
     entrypoint: ""
     command: /opt/config/apply.sh
   web_client:
-    image: registry.gitlab.com/tokend/blockparty/web-client:1028884756e512d9d1d98274f29bf0f13fae4b5e
+    image: registry.gitlab.com/tokend/blockparty/web-client:b3dbdee9cdfdf108856f37fec2518dfdf22e8746
     restart: unless-stopped
     labels:
       - "traefik.enabled=false"
@@ -168,7 +168,7 @@ services:
     volumes:
       - storage-data:/data
   nft-svc:
-    image: registry.gitlab.com/tokend/nft-svc:5900ac77de2f36a44d286d50b8516c47d02d4b14
+    image: registry.gitlab.com/tokend/nft-svc:0c4484b78006c183c6249270c03baf67cbd962fb
     restart: unless-stopped
     entrypoint: sh -c "nft-svc migrate up && nft-svc run"
     depends_on:

@@ -5,7 +5,8 @@ document.ENV = {
     KEY_SERVER_ADMIN: 'http://localhost:8000/_/adks',
     VALIDATE_EMAILS: false,
     WEB_CLIENT_URL: 'http://localhost:8060',
-    IPFS_HOST: 'ipfs.blockparty.co',
-    IPFS_PORT: '80',
+    IPFS_HOST: 'ipfs.infura.io',
+    TOKEN_URI_HOST: 'gateway.ipfs.io/ipfs/',
+    IPFS_PORT: '5001',
     IPFS_PROTOCOL: 'https'
 }

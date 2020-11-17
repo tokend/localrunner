@@ -17,14 +17,14 @@ deposit:
   etherscan_url: "https://ropsten.etherscan.io/"
 
 funnel:
-  gas_price: "20"
+  gas_price: "40"
   threshold: "0"
   hot_wallet: "0x9266798B4469275e844C94f747b4e35Dc6aD8D77"
   private_key: "75603080DAED3924A5544F6815688A2E94F07C89864BFB750D99A8F107B8E3E8"
 
 deployer:
   private_key: "75603080DAED3924A5544F6815688A2E94F07C89864BFB750D99A8F107B8E3E8"
-  gas_price: "20"
+  gas_price: "40"
   gas_limit: "300000"
   contract_owner: "0x9266798B4469275e844C94f747b4e35Dc6aD8D77"
   signer: "SAMJKTZVW5UOHCDK5INYJNORF2HRKYI72M5XSZCBYAHQHR34FFR4Z6G4"
