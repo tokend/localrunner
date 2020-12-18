@@ -148,7 +148,7 @@ services:
     entrypoint: ""
     command: /opt/config/apply.sh
   web_client:
-    image: registry.gitlab.com/tokend/blockparty/web-client:b3dbdee9cdfdf108856f37fec2518dfdf22e8746
+    image: registry.gitlab.com/tokend/blockparty/web-client:2.2.0
     restart: unless-stopped
     labels:
       - "traefik.enabled=false"
@@ -179,7 +179,7 @@ services:
     volumes:
       - storage-data:/data
   nft-svc:
-    image: registry.gitlab.com/tokend/nft-svc:0c4484b78006c183c6249270c03baf67cbd962fb
+    image: registry.gitlab.com/tokend/blockparty/nft-svc:0.5.0-rc.1
     restart: unless-stopped
     entrypoint: sh -c "nft-svc migrate up && nft-svc run"
     depends_on:
@@ -202,7 +202,7 @@ services:
     volumes:
       - nft-data:/pgdata
   marketplace:
-    image: registry.gitlab.com/tokend/marketplace-svc:414669b4ed49b002fc1b3c114f51699ff296709a
+    image: registry.gitlab.com/tokend/blockparty/marketplace-svc:0.5.0-rc.4
     restart: unless-stopped
     environment:
       - KV_VIPER_FILE=/config.yaml
@@ -247,6 +247,31 @@ services:
       - PGDATA=/pgdata
     volumes:
       - dns-data:/pgdata
+  identity-storage:
+    image: registry.gitlab.com/tokend/identity-storage:0086e9381a6cd4f1993e3e585cca3ea771a9d0a4
+    labels:
+      - "traefik.enabled=false"
+    environment:
+      - KV_VIPER_FILE=/config.yaml
+    restart: unless-stopped
+    depends_on:
+      - horizon
+      - identity_db
+    volumes:
+      - ./configs/identity-storage.yaml:/config.yaml
+    entrypoint: sh -c "identity-storage migrate up && identity-storage run service"
+  identity_db:
+    image: tokend/postgres-ubuntu:9.6
+    labels:
+      - "traefik.enabled=false"
+    restart: unless-stopped
+    environment:
+      - POSTGRES_USER=identity
+      - POSTGRES_PASSWORD=identity
+      - POSTGRES_DB=identity
+      - PGDATA=/pgdata
+    volumes:
+      - identity-data:/pgdata
 
   ## Ethereum
   erc20-deposit:
@@ -304,7 +329,7 @@ services:
 
 
   erc721-deposit:
-    image: registry.gitlab.com/tokend/blockparty/erc-721-deposit:0fd27b88b4c317355ba1e84da4074122743c9073
+    image: registry.gitlab.com/tokend/blockparty/erc-721-deposit:0.1.0-rc.1
     labels:
       - "traefik.enabled=false"
     restart: unless-stopped
@@ -316,9 +341,8 @@ services:
       - ./configs/erc721-deposit.yaml:/config.yaml
     entrypoint: "erc-721-deposit"
     command: ["run", "deposit"]
-
   erc721-deployer:
-    image: registry.gitlab.com/tokend/blockparty/erc-721-deposit:0fd27b88b4c317355ba1e84da4074122743c9073
+    image: registry.gitlab.com/tokend/blockparty/erc-721-deposit:0.1.0-rc.1
     restart: on-failure
     labels:
       - "traefik.enabled=false"
@@ -331,35 +355,8 @@ services:
       - ./configs/erc721-deposit.yaml:/config.yaml
     entrypoint: "erc-721-deposit"
     command: ["run", "deployer"]
-
-  identity-storage:
-    image: registry.gitlab.com/tokend/identity-storage:0086e9381a6cd4f1993e3e585cca3ea771a9d0a4
-    labels:
-      - "traefik.enabled=false"
-    environment:
-      - KV_VIPER_FILE=/config.yaml
-    restart: unless-stopped
-    depends_on:
-      - horizon
-      - identity_db
-    volumes:
-      - ./configs/identity-storage.yaml:/config.yaml
-    entrypoint: sh -c "identity-storage migrate up && identity-storage run service"
-  identity_db:
-    image: tokend/postgres-ubuntu:9.6
-    labels:
-      - "traefik.enabled=false"
-    restart: unless-stopped
-    environment:
-      - POSTGRES_USER=identity
-      - POSTGRES_PASSWORD=identity
-      - POSTGRES_DB=identity
-      - PGDATA=/pgdata
-    volumes:
-      - identity-data:/pgdata
-
   erc721-funnel:
-    image: registry.gitlab.com/tokend/blockparty/erc-721-deposit:0fd27b88b4c317355ba1e84da4074122743c9073
+    image: registry.gitlab.com/tokend/blockparty/erc-721-deposit:0.1.0-rc.1
     restart: unless-stopped
     labels:
       - "traefik.enabled=false"
@@ -372,7 +369,7 @@ services:
     entrypoint: "erc-721-deposit"
     command: ["run", "funnel"]
   erc721-withdraw:
-    image: registry.gitlab.com/tokend/blockparty/erc-721-withdraw:6c8f3b51c43090c080b9a6d1ebe85dbfbb52bc3c
+    image: registry.gitlab.com/tokend/blockparty/erc-721-withdraw:0.1.0-rc.1
     restart: unless-stopped
     labels:
       - "traefik.enabled=false"
