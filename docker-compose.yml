@@ -225,7 +225,7 @@ services:
     volumes:
       - marketplace-data:/pgdata
   dns:
-    image: mydns:latest
+    image: registry.gitlab.com/tokend/blockparty/dns-svc:0.5.0-rc.1
     restart: unless-stopped
     environment:
       - KV_VIPER_FILE=/config.yaml
