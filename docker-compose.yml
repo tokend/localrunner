@@ -179,7 +179,7 @@ services:
     volumes:
       - storage-data:/data
   nft-svc:
-    image: registry.gitlab.com/tokend/blockparty/nft-svc:1.0.0-rc.0
+    image: registry.gitlab.com/tokend/blockparty/nft-svc:148275b28e3f71cae605c11dd7b493cb1c97539a
     restart: unless-stopped
     entrypoint: sh -c "nft-svc migrate up && nft-svc run"
     depends_on:
