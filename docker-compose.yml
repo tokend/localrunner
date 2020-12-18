@@ -1,6 +1,18 @@
 version: '3.3'
 
 services:
+  docker-host:
+    image: qoomon/docker-host
+    cap_add: [ 'NET_ADMIN', 'NET_RAW' ]
+    restart: on-failure
+  tcp_message_emitter:
+    depends_on: [ docker-host ]
+    image: alpine
+    command: [ "sh", "-c", "while :; do date; sleep 1; done | nc 'docker-host' 2323 -v"]
+  udp_message_emitter:
+    depends_on: [ docker-host ]
+    image: alpine
+    command: [ "sh", "-c", "while :; do date; sleep 1; done | nc 'docker-host' 5353 -u -v"]
   traefik:
     image: traefik:v2.0
     ports:
@@ -101,7 +113,6 @@ services:
     volumes:
       - ./configs/horizon.yaml:/config.yaml
       - horizon-data:/data
-
   api:
     image: tokend/identity:4.5.5-rc.0
     restart: unless-stopped
@@ -178,7 +189,6 @@ services:
       - KV_VIPER_FILE=/config.yaml
     volumes:
       - ./configs/nft-svc.yaml:/config.yaml
-
   nft_svc_db:
     image: tokend/postgres-ubuntu:9.6
     restart: unless-stopped
@@ -191,43 +201,6 @@ services:
       - PGDATA=/pgdata
     volumes:
       - nft-data:/pgdata
-
-  ##
-  ## Auxiliary modules
-  ##
-
-  charts:
-    image: tokend/charts:0.4.2-rc.1
-    restart: unless-stopped
-    environment:
-      - KV_VIPER_FILE=/config.yaml
-    volumes:
-      - ./configs/charts.yaml:/config.yaml
-    ports:
-      - 8080:8080
-    command: run
-  salecloser:
-    image: tokend/sale-closer-svc:1.0.1
-    depends_on:
-      - horizon
-    restart: unless-stopped
-    labels:
-      - "traefik.enabled=false"
-    volumes:
-      - ./configs/salecloser.yaml:/config.yaml
-    environment:
-      - KV_VIPER_FILE=/config.yaml
-    command: "run"
-  poll_closer:
-    image: tokend/poll-closer:0.1.1
-    restart: unless-stopped
-    labels:
-      - "traefik.enabled=false"
-    environment:
-      - KV_VIPER_FILE=/config.yaml
-    volumes:
-      - ./configs/poll-closer.yaml:/config.yaml
-    command: run closer
   marketplace:
     image: registry.gitlab.com/tokend/marketplace-svc:414669b4ed49b002fc1b3c114f51699ff296709a
     restart: unless-stopped
@@ -252,7 +225,7 @@ services:
     volumes:
       - marketplace-data:/pgdata
   dns:
-    image: tokend/dns:0.4.0-rc.1
+    image: mydns:latest
     restart: unless-stopped
     environment:
       - KV_VIPER_FILE=/config.yaml
@@ -275,66 +248,6 @@ services:
     volumes:
       - dns-data:/pgdata
 
-  ## 3rd party
-
-  autoheal:
-    image: willfarrell/autoheal
-    restart: unless-stopped
-    labels:
-      - "traefik.enabled=false"
-    environment:
-      - AUTOHEAL_START_PERIOD=60
-      - AUTOHEAL_DEFAULT_STOP_TIMEOUT=30
-    volumes:
-      - /var/run/docker.sock:/var/run/docker.sock
-
-  ##
-  ## Integration services
-  ##
-
-  ## Coinpayments
-
-  coinpayments-deposit:
-    image: tokend/coinpayments:0.4.9-rc.0
-    restart: unless-stopped
-    environment:
-      - KV_VIPER_FILE=/config.yaml
-    volumes:
-      - ./configs/coinpayments-deposit.yaml:/config.yaml
-    command: deposit
-  coinpayments-deposit-verify:
-    image: tokend/coinpayments:0.4.9-rc.0
-    restart: unless-stopped
-    environment:
-      - KV_VIPER_FILE=/config.yaml
-    volumes:
-      - ./configs/coinpayments-deposit-verify.yaml:/config.yaml
-    command: deposit-verify
-  coinpayments-withdraw:
-    image: tokend/coinpayments:0.4.9-rc.0
-    restart: unless-stopped
-    environment:
-      - KV_VIPER_FILE=/config.yaml
-    volumes:
-      - ./configs/coinpayments-withdraw.yaml:/config.yaml
-    command: withdraw
-  coinpayments-atomic-swap-checker:
-    image: tokend/coinpayments:0.4.9-rc.0
-    restart: unless-stopped
-    environment:
-      - KV_VIPER_FILE=/config.yaml
-    volumes:
-      - ./configs/coinpayments-atomic-swap-checker.yaml:/config.yaml
-    command: atomic-swap-checker
-  coinpayments-atomic-swap-matcher:
-    image: tokend/coinpayments:0.4.9-rc.0
-    restart: unless-stopped
-    environment:
-      - KV_VIPER_FILE=/config.yaml
-    volumes:
-      - ./configs/coinpayments-atomic-swap-matcher.yaml:/config.yaml
-    command: atomic-swap-matcher
-
   ## Ethereum
   erc20-deposit:
     image: registry.gitlab.com/tokend/docker-registry/erc20-deposit-svc:362f073aa4b6205f737cfbbed9473e72941d3ffc
@@ -349,7 +262,6 @@ services:
       - ./configs/erc20-deposit.yaml:/config.yaml
     entrypoint: "erc20-deposit-svc"
     command: ["run", "deposit"]
-
   erc20-deployer:
     image: registry.gitlab.com/tokend/docker-registry/erc20-deposit-svc:362f073aa4b6205f737cfbbed9473e72941d3ffc
     restart: on-failure
@@ -363,7 +275,6 @@ services:
       - ./configs/erc20-deposit.yaml:/config.yaml
     entrypoint: "erc20-deposit-svc"
     command: ["run", "deployer"]
-
   erc20-funnel:
     image: registry.gitlab.com/tokend/docker-registry/erc20-deposit-svc:362f073aa4b6205f737cfbbed9473e72941d3ffc
     restart: unless-stopped
@@ -377,7 +288,6 @@ services:
       - ./configs/erc20-deposit.yaml:/config.yaml
     entrypoint: "erc20-deposit-svc"
     command: ["run", "funnel"]
-
   erc20-withdraw:
     image: tokend/erc20-withdraw-svc:1.0.6
     restart: unless-stopped
@@ -391,18 +301,8 @@ services:
       - ./configs/erc20-withdraw.yaml:/config.yaml
     entrypoint: "erc20-withdraw-svc"
     command: ["run", "withdraw"]
-  docker-host:
-    image: qoomon/docker-host
-    cap_add: [ 'NET_ADMIN', 'NET_RAW' ]
-    restart: on-failure
-  tcp_message_emitter:
-    depends_on: [ docker-host ]
-    image: alpine
-    command: [ "sh", "-c", "while :; do date; sleep 1; done | nc 'docker-host' 2323 -v"]
-  udp_message_emitter:
-    depends_on: [ docker-host ]
-    image: alpine
-    command: [ "sh", "-c", "while :; do date; sleep 1; done | nc 'docker-host' 5353 -u -v"]
+
+
   erc721-deposit:
     image: registry.gitlab.com/tokend/blockparty/erc-721-deposit:0fd27b88b4c317355ba1e84da4074122743c9073
     labels:
@@ -471,7 +371,6 @@ services:
       - ./configs/erc721-deposit.yaml:/config.yaml
     entrypoint: "erc-721-deposit"
     command: ["run", "funnel"]
-
   erc721-withdraw:
     image: registry.gitlab.com/tokend/blockparty/erc-721-withdraw:6c8f3b51c43090c080b9a6d1ebe85dbfbb52bc3c
     restart: unless-stopped
@@ -485,7 +384,6 @@ services:
       - ./configs/erc721-withdraw.yaml:/config.yaml
     entrypoint: "erc-721-withdraw"
     command: ["run", "withdraw"]
-
   stripe:
     image: registry.gitlab.com/tokend/psims/stripe-svc:8f33113418277059d8aad3c8bbd997bd952c7f85
     restart: unless-stopped
