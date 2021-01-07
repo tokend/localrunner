@@ -202,7 +202,7 @@ services:
     volumes:
       - nft-data:/pgdata
   marketplace:
-    image: mymarketplace:latest
+    image: registry.gitlab.com/tokend/blockparty/marketplace-svc:113c165f3d7e3820676e8d9f5e6a2f28de0fd970
     restart: unless-stopped
     environment:
       - KV_VIPER_FILE=/config.yaml
