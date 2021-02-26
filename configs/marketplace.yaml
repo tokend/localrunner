@@ -15,7 +15,8 @@ listener:
 marketplace:
   payment_signer: "SAMJKTZVW5UOHCDK5INYJNORF2HRKYI72M5XSZCBYAHQHR34FFR4Z6G4"
   skip_sign_check: false
-  tx_expiration_time: 30m
+  tx_expiration_time: 1m
+  prolongation_time: 15m
 
 cop:
   endpoint: http://cop
@@ -38,8 +39,8 @@ oracle:
 
 coinpayer:
   checkpoint: 8882144
-  rpc: "ws://63.32.188.217:8546"
-  contract_address: "0xBd3Cc3Ff4De3e32C9cd3c5A60f1AF417D13F78Ab"
+  rpc: "ws://3.133.141.208:8546"
+  contract_address: "0x80f790e99B5BceD847AB96745a56448C49961FEF"
   eth_signer: "75603080DAED3924A5544F6815688A2E94F07C89864BFB750D99A8F107B8E3E8"
 
 4bill:

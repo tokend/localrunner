@@ -157,7 +157,7 @@ services:
     ports:
       - 8060:80
   admin_client:
-    image: registry.gitlab.com/tokend/blockparty/admin-panel:831c40cf7927310100765830d7321175ae6e9454
+    image: registry.gitlab.com/tokend/blockparty/admin-panel:1.1.0-rc.1
     restart: unless-stopped
     labels:
       - "traefik.enabled=false"
@@ -202,7 +202,7 @@ services:
     volumes:
       - nft-data:/pgdata
   marketplace:
-    image: registry.gitlab.com/tokend/blockparty/marketplace-svc:113c165f3d7e3820676e8d9f5e6a2f28de0fd970
+    image: registry.gitlab.com/tokend/blockparty/marketplace-svc:b43a472a6a61e40b49056961c89a71bf4edca2d5
     restart: unless-stopped
     environment:
       - KV_VIPER_FILE=/config.yaml
@@ -224,8 +224,31 @@ services:
       - PGDATA=/pgdata
     volumes:
       - marketplace-data:/pgdata
+  auction:
+    image: registry.gitlab.com/tokend/blockparty/auction-svc:80af7cd9b61af5643dfd2646a3bebd05b5ce73f7
+    restart: unless-stopped
+    environment:
+      - KV_VIPER_FILE=/config.yaml
+    depends_on:
+      - horizon
+      - auction_db
+    volumes:
+      - ./configs/auction.yaml:/config.yaml
+    entrypoint: sh -c "auction-svc migrate up && auction-svc run"
+  auction_db:
+    image: tokend/postgres-ubuntu:9.6
+    labels:
+      - "traefik.enabled=false"
+    restart: unless-stopped
+    environment:
+      - POSTGRES_USER=auction
+      - POSTGRES_PASSWORD=auction
+      - POSTGRES_DB=auction
+      - PGDATA=/pgdata
+    volumes:
+      - auction-data:/pgdata
   dns:
-    image: registry.gitlab.com/tokend/blockparty/dns-svc:0.5.0-rc.1
+    image: registry.gitlab.com/tokend/blockparty/dns-svc:0.5.2-rc.3
     restart: unless-stopped
     environment:
       - KV_VIPER_FILE=/config.yaml
@@ -382,13 +405,13 @@ services:
     entrypoint: "erc-721-withdraw"
     command: ["run", "withdraw"]
   stripe:
-    image: registry.gitlab.com/tokend/psims/stripe-svc:8f33113418277059d8aad3c8bbd997bd952c7f85
+    image: registry.gitlab.com/tokend/blockparty/stripe-svc:4021b500f31608fb228b84b4dbe1a784003ad37e
     restart: unless-stopped
     volumes:
       - ./configs/stripe.yaml:/config.yaml
     environment:
       - KV_VIPER_FILE=/config.yaml
-    entrypoint: stripe-svc
+    entrypoint: sh -c "stripe-svc migrate up && stripe-svc run"
     command: run
     depends_on:
       - horizon
@@ -446,6 +469,18 @@ services:
       - PGDATA=/pgdata
     volumes:
       - notificator-data:/pgdata
+  stripe_db:
+    image: tokend/postgres-ubuntu:9.6
+    labels:
+      - "traefik.enabled=false"
+    restart: unless-stopped
+    environment:
+      - POSTGRES_USER=stripe
+      - POSTGRES_PASSWORD=stripe
+      - POSTGRES_DB=stripe
+      - PGDATA=/pgdata
+    volumes:
+      - stripe-data:/pgdata
 volumes:
   identity-data:
   adks-data:
@@ -459,3 +494,5 @@ volumes:
   dns-data:
   templates-data:
   notificator-data:
+  stripe-data:
+  auction-data:

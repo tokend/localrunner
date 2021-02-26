@@ -1,8 +1,8 @@
 rpc:
-  endpoint: "ws://63.32.188.217:8546"
+  endpoint: "ws://3.133.141.208:8546"
 
 ethereum:
-  checkpoint: 8882144 #block to start listening for deposits from
+  checkpoint: 8100000 #block to start listening for deposits from
   confirmations: 1 #number of confirmations to wait for
 
 token_url:

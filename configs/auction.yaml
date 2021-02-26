@@ -1,0 +1,26 @@
+log:
+  level: debug
+  disable_sentry: true
+db:
+  url: "postgres://auction:auction@auction_db/auction?sslmode=disable"
+horizon:
+  signer: SAMJKTZVW5UOHCDK5INYJNORF2HRKYI72M5XSZCBYAHQHR34FFR4Z6G4
+  endpoint: "http://traefik/"
+listener:
+  addr: :80
+auction:
+  payment_signer: "SAMJKTZVW5UOHCDK5INYJNORF2HRKYI72M5XSZCBYAHQHR34FFR4Z6G4"
+  skip_sign_check: false
+  tx_expiration_time: 3m
+cop:
+  endpoint: http://cop
+  upstream: http://auction
+  service_name: "auction-service"
+  service_port: "80"
+  service_prefix: "/integrations/auction"
+fiat_integrations:
+  data:
+  - endpoint: http://stripe/integrations/stripe
+    currency: USD
+nft_svc:
+  endpoint: http://nft-svc

@@ -6,10 +6,10 @@ listener:
   addr: :80
 
 stripe:
-  secret_key: sk_test_oWxMeyILtYs7mke2gTW9czIu
+  secret_key: sk_test_51HHtyPI5B0e8ZBIZhMQC5hT4JZ0X568c9VBJnagrLA95y0eJxeh6ottvUioKwzgqFDb8ayaCjMDQ0o9ylgOeETWA00VHwhuO9S
   domain: http://b8996c3a.ngrok.io/_/api/
-  success_url: http://localhost:8060
-  cancel_url: http://localhost:8060
+  success_url: http://localhost:8095
+  cancel_url: http://localhost:8095
 
 cop:
   endpoint: http://cop
@@ -18,3 +18,14 @@ cop:
   service_port: 80
   service_prefix: "/integrations/stripe"
 
+identities:
+  signer: SAMJKTZVW5UOHCDK5INYJNORF2HRKYI72M5XSZCBYAHQHR34FFR4Z6G4
+  endpoint: http://api
+
+db:
+  driver: "postgres"
+  url: "postgres://stripe:stripe@stripe_db/stripe?sslmode=disable"
+
+horizon:
+  signer: SAMJKTZVW5UOHCDK5INYJNORF2HRKYI72M5XSZCBYAHQHR34FFR4Z6G4
+  endpoint: "http://traefik/"
