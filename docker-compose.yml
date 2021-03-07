@@ -225,7 +225,7 @@ services:
     volumes:
       - marketplace-data:/pgdata
   auction:
-    image: registry.gitlab.com/tokend/blockparty/auction-svc:80af7cd9b61af5643dfd2646a3bebd05b5ce73f7
+    image: registry.gitlab.com/tokend/blockparty/auction-svc:c9ef53d192bd9c4c1ce7428c281709e5259c6991
     restart: unless-stopped
     environment:
       - KV_VIPER_FILE=/config.yaml
@@ -405,7 +405,7 @@ services:
     entrypoint: "erc-721-withdraw"
     command: ["run", "withdraw"]
   stripe:
-    image: registry.gitlab.com/tokend/blockparty/stripe-svc:4021b500f31608fb228b84b4dbe1a784003ad37e
+    image: registry.gitlab.com/tokend/blockparty/stripe-svc:2565014bb304324cca46e61b7368ae2a2c331cea
     restart: unless-stopped
     volumes:
       - ./configs/stripe.yaml:/config.yaml
