@@ -27,7 +27,7 @@ nft_svc:
 ethbidder:
   checkpoint: 8882144
   rpc: "ws://3.133.141.208:8546"
-  contract_address: "0x1a54d8c534236Bc1482192b2435f6e1d557DB161"
+  contract_address: "0x2eD4Ce23d4364b80C73bb97917214B6f446ac3BC"
   eth_signer: "75603080DAED3924A5544F6815688A2E94F07C89864BFB750D99A8F107B8E3E8"
 oracle:
   asset: "ethereum"

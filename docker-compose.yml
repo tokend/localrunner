@@ -225,7 +225,7 @@ services:
     volumes:
       - marketplace-data:/pgdata
   auction:
-    image: registry.gitlab.com/tokend/blockparty/auction-svc:c9ef53d192bd9c4c1ce7428c281709e5259c6991
+    image: registry.gitlab.com/tokend/blockparty/auction-svc:dc5a81ae8cd921c1024d976bfd03fedd328c7585
     restart: unless-stopped
     environment:
       - KV_VIPER_FILE=/config.yaml
