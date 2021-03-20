@@ -1,0 +1,33 @@
+incomer:
+  capacity: 10
+
+s3:
+  aws_region: us-east-2
+  access_key_id: AKIAVDQXUIGP25PBAO2C
+  secret_key: 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
+  bucket: blockparty-tokens
+
+nft:
+  endpoint: http://nft-svc
+  signer: SAMJKTZVW5UOHCDK5INYJNORF2HRKYI72M5XSZCBYAHQHR34FFR4Z6G4
+
+ipfs:
+  timeout: 1m
+
+horizon:
+  endpoint: http://horizon
+  signer: SAMJKTZVW5UOHCDK5INYJNORF2HRKYI72M5XSZCBYAHQHR34FFR4Z6G4
+
+cop:
+  endpoint: http://cop
+  upstream: http://details
+  service_name: "details-updater"
+  service_port: "80"
+  service_prefix: "/integrations/details"
+
+listener:
+  addr: :80
+
+log:
+  level: debug
+  disable_sentry: true

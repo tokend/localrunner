@@ -1,0 +1,13 @@
+rpc:
+  endpoint: "ws://63.32.188.217:18546"
+
+horizon:
+  endpoint: "http://horizon"
+  signer: "SAMJKTZVW5UOHCDK5INYJNORF2HRKYI72M5XSZCBYAHQHR34FFR4Z6G4"
+
+
+
+log:
+  level: debug
+  disable_sentry: true
+
