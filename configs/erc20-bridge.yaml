@@ -10,10 +10,18 @@ listener:
   addr: :80
 
 cop:
-  endpoint: http://
+  endpoint: http://cop
   upstream: http://bridge
-  service_name: "charts-service"
+  service_name: "erc20-bridge"
   service_port: "80"
+  service_prefix: "/integrations/bridge"
+
+withdraw:
+  owner: "GBA4EX43M25UPV4WIE6RRMQOFTWXZZRIPFAI5VPY6Z2ZVVXVWZ6NEOOB"
+  signer: "SAMJKTZVW5UOHCDK5INYJNORF2HRKYI72M5XSZCBYAHQHR34FFR4Z6G4"
+
+signer:
+  eth_signer: "75603080DAED3924A5544F6815688A2E94F07C89864BFB750D99A8F107B8E3E8"
 
 log:
   level: debug

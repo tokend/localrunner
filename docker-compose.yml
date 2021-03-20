@@ -30,7 +30,7 @@ services:
       - horizon
       - adks_db
     ports:
-      - 8006:80
+      - 8007:80
     volumes:
       - ./configs/adks.toml:/config.toml
   adks_db:
@@ -183,82 +183,15 @@ services:
     volumes:
       - /var/run/docker.sock:/var/run/docker.sock
 
-  ##
-  ## Integration services
-  ##
-
-  ## Coinpayments
-
-  coinpayments-deposit:
-    image: tokend/coinpayments:0.5.0
-    restart: unless-stopped
-    environment:
-      - KV_VIPER_FILE=/config.yaml
-    volumes:
-      - ./configs/coinpayments-deposit.yaml:/config.yaml
-    command: deposit
-  coinpayments-deposit-verify:
-    image: tokend/coinpayments:0.5.0
-    restart: unless-stopped
-    environment:
-      - KV_VIPER_FILE=/config.yaml
-    volumes:
-      - ./configs/coinpayments-deposit-verify.yaml:/config.yaml
-    command: deposit-verify
-  coinpayments-withdraw:
-    image: tokend/coinpayments:0.5.0
-    restart: unless-stopped
-    environment:
-      - KV_VIPER_FILE=/config.yaml
-    volumes:
-      - ./configs/coinpayments-withdraw.yaml:/config.yaml
-    command: withdraw
-  coinpayments-atomic-swap-checker:
-    image: tokend/coinpayments:0.5.0
-    restart: unless-stopped
-    environment:
-      - KV_VIPER_FILE=/config.yaml
-    volumes:
-      - ./configs/coinpayments-atomic-swap-checker.yaml:/config.yaml
-    command: atomic-swap-checker
-  coinpayments-atomic-swap-matcher:
-    image: tokend/coinpayments:0.5.0
-    restart: unless-stopped
-    environment:
-      - KV_VIPER_FILE=/config.yaml
-    volumes:
-      - ./configs/coinpayments-atomic-swap-matcher.yaml:/config.yaml
-    command: atomic-swap-matcher
-
-  ## Stellar
-  stellar-deposit:
-    image: tokend/stellar-deposit-svc:1.0.5
+  bridge:
+    image: registry.gitlab.com/tokend/sd3/erc20-bridge:4b948be27fffb7e6ac1f685b9a50174d92628793
     restart: unless-stopped
     depends_on:
       - horizon
     environment:
       - KV_VIPER_FILE=/config.yaml
     volumes:
-      - ./configs/stellar-deposit.yaml:/config.yaml
-  stellar-withdraw:
-    image: tokend/stellar-withdraw-svc:1.0.1
-    restart: unless-stopped
-    depends_on:
-      - horizon
-    environment:
-      - KV_VIPER_FILE=/config.yaml
-    volumes:
-      - ./configs/stellar-withdraw.yaml:/config.yaml
-
-  erc20-bridge:
-    image: registry.gitlab.com/tokend/sd3/erc20-bridge:a5e77848f186af44b8df3c3e19b87b803bcb62
-    restart: unless-stopped
-    depends_on:
-      - horizon
-    environment:
-      - KV_VIPER_FILE=/config.yaml
-    volumes:
-      - ./configs/erc20-deposit.yaml:/config.yaml
+      - ./configs/erc20-bridge.yaml:/config.yaml
     entrypoint: "erc20-bridge"
     command: ["run", "withdraw"]
 
