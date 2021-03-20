@@ -114,14 +114,14 @@ services:
     entrypoint: ""
     command: /opt/config/apply.sh
   web_client:
-    image: tokend/web-client:1.13.0-rc.0
+    image: registry.gitlab.com/tokend/sd3/web-client-sd3:479a6919a554772225454ab43788cbb96c8b8229
     restart: unless-stopped
     volumes:
       - ./configs/client.js:/usr/share/nginx/html/static/env.js
     ports:
       - 8060:80
   admin_client:
-    image: tokend/admin-client:1.13.0
+    image: registry.gitlab.com/tokend/sd3/admin-panel-sd3:34dce82145a2227b3658b9d72cb13097c8ec87e9
     restart: unless-stopped
     volumes:
       - ./configs/client.js:/usr/share/nginx/html/static/env.js
