@@ -1,11 +1,19 @@
 rpc:
-  endpoint: "ws://63.32.188.217:18546"
+  endpoint: "ws://63.32.188.217:8546"
+  start_point: 8268357
 
 horizon:
   endpoint: "http://horizon"
   signer: "SAMJKTZVW5UOHCDK5INYJNORF2HRKYI72M5XSZCBYAHQHR34FFR4Z6G4"
 
+listener:
+  addr: :80
 
+cop:
+  endpoint: http://
+  upstream: http://bridge
+  service_name: "charts-service"
+  service_port: "80"
 
 log:
   level: debug

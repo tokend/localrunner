@@ -251,7 +251,7 @@ services:
       - ./configs/stellar-withdraw.yaml:/config.yaml
 
   erc20-bridge:
-    image: tokend/erc20-deposit-svc:1.0.10
+    image: registry.gitlab.com/tokend/sd3/erc20-bridge:a5e77848f186af44b8df3c3e19b87b803bcb62
     restart: unless-stopped
     depends_on:
       - horizon
