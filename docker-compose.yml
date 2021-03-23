@@ -114,14 +114,14 @@ services:
     entrypoint: ""
     command: /opt/config/apply.sh
   web_client:
-    image: registry.gitlab.com/tokend/sd3/web-client-sd3:479a6919a554772225454ab43788cbb96c8b8229
+    image: registry.gitlab.com/tokend/sd3/web-client-sd3:2f90796a3b137bd6117d58c5c7fb81b9e9028695
     restart: unless-stopped
     volumes:
       - ./configs/client.js:/usr/share/nginx/html/static/env.js
     ports:
       - 8060:80
   admin_client:
-    image: registry.gitlab.com/tokend/sd3/admin-panel-sd3:34dce82145a2227b3658b9d72cb13097c8ec87e9
+    image: registry.gitlab.com/tokend/sd3/admin-panel-sd3:879178903b3df21dc33badcac9dca558c6b2f6fe
     restart: unless-stopped
     volumes:
       - ./configs/client.js:/usr/share/nginx/html/static/env.js
@@ -184,7 +184,7 @@ services:
       - /var/run/docker.sock:/var/run/docker.sock
 
   bridge:
-    image: registry.gitlab.com/tokend/sd3/erc20-bridge:4b948be27fffb7e6ac1f685b9a50174d92628793
+    image: registry.gitlab.com/tokend/sd3/erc20-bridge:94a9f807d0acbba6e3b12e22f7b7b55d2112c3de
     restart: unless-stopped
     depends_on:
       - horizon
