@@ -184,7 +184,7 @@ services:
       - /var/run/docker.sock:/var/run/docker.sock
 
   bridge:
-    image: registry.gitlab.com/tokend/sd3/erc20-bridge:94a9f807d0acbba6e3b12e22f7b7b55d2112c3de
+    image: registry.gitlab.com/tokend/sd3/erc20-bridge:a0cc896c3402b2966088598f2494e518a945de22
     restart: unless-stopped
     depends_on:
       - horizon

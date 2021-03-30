@@ -1,5 +1,5 @@
 rpc:
-  endpoint: "ws://63.32.188.217:8546"
+  endpoint: "ws://3.15.200.203:8546"
   start_point: 8268357
 
 horizon:
