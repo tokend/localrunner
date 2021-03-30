@@ -1,8 +1,8 @@
 rpc:
-  endpoint: "ws://3.133.141.208:8546"
+  endpoint: "wss://rinkeby.infura.io/ws/v3/575232417faf4efaa8f1d204e1fcab28"
 
 ethereum:
-  checkpoint: 8190000 #block to start listening for deposits from
+  checkpoint: 8291000 #block to start listening for deposits from
   confirmations: 1 #number of confirmations to wait for
 
 token_url:

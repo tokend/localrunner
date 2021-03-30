@@ -11,7 +11,7 @@ listener:
 auction:
   payment_signer: "SAMJKTZVW5UOHCDK5INYJNORF2HRKYI72M5XSZCBYAHQHR34FFR4Z6G4"
   skip_sign_check: false
-  tx_expiration_time: 3m
+  tx_expiration_time: 1m
 cop:
   endpoint: http://cop
   upstream: http://auction
@@ -26,8 +26,8 @@ nft_svc:
   endpoint: http://nft-svc
 ethbidder:
   checkpoint: 8882144
-  rpc: "ws://3.133.141.208:8546"
-  contract_address: "0x2eD4Ce23d4364b80C73bb97917214B6f446ac3BC"
+  rpc: "wss://rinkeby.infura.io/ws/v3/575232417faf4efaa8f1d204e1fcab28"
+  contract_address: "0x27Ee70251f26836A95EEc019943Bf9750E442274"
   eth_signer: "75603080DAED3924A5544F6815688A2E94F07C89864BFB750D99A8F107B8E3E8"
 oracle:
   asset: "ethereum"
