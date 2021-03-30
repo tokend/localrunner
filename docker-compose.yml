@@ -148,7 +148,7 @@ services:
     entrypoint: ""
     command: /opt/config/apply.sh
   web_client:
-    image: registry.gitlab.com/tokend/blockparty/web-client:2.2.0
+    image: registry.gitlab.com/tokend/blockparty/web-client:adb5af3b2a4ffb3f42ed27df3dc684fe6e3d4f79
     restart: unless-stopped
     labels:
       - "traefik.enabled=false"
