@@ -11,8 +11,8 @@ listener:
 
 cop:
   endpoint: http://cop
-  upstream: http://erc721-bridge
-  service_name: erc721-bridge
+  upstream: http://bridge
+  service_name: bridge
   service_port: 80
   service_prefix: /integrations/bridge
 

@@ -349,7 +349,7 @@ services:
       - ./configs/erc20-withdraw.yaml:/config.yaml
     entrypoint: "erc20-withdraw-svc"
     command: ["run", "withdraw"]
-  erc721-bridge:
+  bridge:
     image: registry.gitlab.com/tokend/blockparty/erc721-bridge-eth:0e649d6e194466e16b490e237a253cf752bc46fa
     restart: unless-stopped
     depends_on:
