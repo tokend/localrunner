@@ -1,0 +1,28 @@
+rpc:
+  endpoint: "wss://apis.ankr.com/wss/1667ea6589b447fa81d6c9d789936c0b/dab6bb4d493446bd07ce3819eb0ca18c/eth/fast/rinkeby"
+  start_point: 8324100
+
+horizon:
+  endpoint: "http://traefik"
+  signer: "SAMJKTZVW5UOHCDK5INYJNORF2HRKYI72M5XSZCBYAHQHR34FFR4Z6G4"
+
+listener:
+  addr: :80
+
+cop:
+  endpoint: http://cop
+  upstream: http://erc721-bridge
+  service_name: erc721-bridge
+  service_port: 80
+  service_prefix: /integrations/bridge
+
+withdraw:
+  owner: "GBA4EX43M25UPV4WIE6RRMQOFTWXZZRIPFAI5VPY6Z2ZVVXVWZ6NEOOB"
+  signer: "SAMJKTZVW5UOHCDK5INYJNORF2HRKYI72M5XSZCBYAHQHR34FFR4Z6G4"
+
+signer:
+  eth_signer: "75603080DAED3924A5544F6815688A2E94F07C89864BFB750D99A8F107B8E3E8"
+
+log:
+  level: debug
+  disable_sentry: true
