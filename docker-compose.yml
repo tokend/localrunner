@@ -349,61 +349,17 @@ services:
       - ./configs/erc20-withdraw.yaml:/config.yaml
     entrypoint: "erc20-withdraw-svc"
     command: ["run", "withdraw"]
-
-
-  erc721-deposit:
-    image: registry.gitlab.com/tokend/blockparty/erc-721-deposit:0.1.0-rc.1
-    labels:
-      - "traefik.enabled=false"
+  bridge:
+    image: registry.gitlab.com/tokend/blockparty/erc721-bridge-eth:0e649d6e194466e16b490e237a253cf752bc46fa
     restart: unless-stopped
     depends_on:
       - horizon
     environment:
       - KV_VIPER_FILE=/config.yaml
     volumes:
-      - ./configs/erc721-deposit.yaml:/config.yaml
-    entrypoint: "erc-721-deposit"
-    command: ["run", "deposit"]
-  erc721-deployer:
-    image: registry.gitlab.com/tokend/blockparty/erc-721-deposit:0.1.0-rc.1
-    restart: on-failure
-    labels:
-      - "traefik.enabled=false"
-    depends_on:
-      - horizon
-      - nft-svc
-    environment:
-      - KV_VIPER_FILE=/config.yaml
-    volumes:
-      - ./configs/erc721-deposit.yaml:/config.yaml
-    entrypoint: "erc-721-deposit"
-    command: ["run", "deployer"]
-  erc721-funnel:
-    image: registry.gitlab.com/tokend/blockparty/erc-721-deposit:0.1.0-rc.1
-    restart: unless-stopped
-    labels:
-      - "traefik.enabled=false"
-    depends_on:
-      - horizon
-    environment:
-      - KV_VIPER_FILE=/config.yaml
-    volumes:
-      - ./configs/erc721-deposit.yaml:/config.yaml
-    entrypoint: "erc-721-deposit"
-    command: ["run", "funnel"]
-  erc721-withdraw:
-    image: registry.gitlab.com/tokend/blockparty/erc-721-withdraw:0.1.0-rc.1
-    restart: unless-stopped
-    labels:
-      - "traefik.enabled=false"
-    depends_on:
-      - horizon
-    environment:
-      - KV_VIPER_FILE=/config.yaml
-    volumes:
-      - ./configs/erc721-withdraw.yaml:/config.yaml
-    entrypoint: "erc-721-withdraw"
-    command: ["run", "withdraw"]
+      - ./configs/erc20-bridge.yaml:/config.yaml
+    entrypoint: "erc20-bridge"
+    command: ["run"]
   stripe:
     image: registry.gitlab.com/tokend/blockparty/stripe-svc:2565014bb304324cca46e61b7368ae2a2c331cea
     restart: unless-stopped
