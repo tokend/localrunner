@@ -8,6 +8,9 @@ db:
 client:
   endpoint: http://horizon
 
+nft_svc:
+  endpoint: http://nft-svc
+
 keys:
   source: GBA4EX43M25UPV4WIE6RRMQOFTWXZZRIPFAI5VPY6Z2ZVVXVWZ6NEOOB
   signer: SAMJKTZVW5UOHCDK5INYJNORF2HRKYI72M5XSZCBYAHQHR34FFR4Z6G4
