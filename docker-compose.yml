@@ -350,7 +350,7 @@ services:
     entrypoint: "erc20-withdraw-svc"
     command: ["run", "withdraw"]
   bridge:
-    image: registry.gitlab.com/tokend/blockparty/erc721-bridge-eth:0e649d6e194466e16b490e237a253cf752bc46fa
+    image: registry.gitlab.com/tokend/blockparty/erc721-bridge-eth:00bc76a575223543017dee10643b099c294887ae
     restart: unless-stopped
     depends_on:
       - horizon
