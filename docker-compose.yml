@@ -248,7 +248,7 @@ services:
     volumes:
       - auction-data:/pgdata
   dns:
-    image: registry.gitlab.com/tokend/blockparty/dns-svc:0.5.2-rc.3
+    image: registry.gitlab.com/tokend/blockparty/dns-svc:0.5.3
     restart: unless-stopped
     environment:
       - KV_VIPER_FILE=/config.yaml
@@ -349,8 +349,8 @@ services:
       - ./configs/erc20-withdraw.yaml:/config.yaml
     entrypoint: "erc20-withdraw-svc"
     command: ["run", "withdraw"]
-  bridge:
-    image: registry.gitlab.com/tokend/blockparty/erc721-bridge-eth:0e649d6e194466e16b490e237a253cf752bc46fa
+  erc721-bridge:
+    image: registry.gitlab.com/tokend/blockparty/erc721-bridge-eth:1eede5be1c7128ddec4632e44bc83ca01d9cae33
     restart: unless-stopped
     depends_on:
       - horizon
@@ -361,7 +361,7 @@ services:
     entrypoint: "erc721-bridge-eth"
     command: ["run"]
   stripe:
-    image: registry.gitlab.com/tokend/blockparty/stripe-svc:2565014bb304324cca46e61b7368ae2a2c331cea
+    image: registry.gitlab.com/tokend/blockparty/stripe-svc:fd3138019dcc5e248190137c32976656ed3d7c5a
     restart: unless-stopped
     volumes:
       - ./configs/stripe.yaml:/config.yaml
