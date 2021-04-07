@@ -3,7 +3,7 @@ rpc:
   start_point: 8324100
 
 horizon:
-  endpoint: "http://traefik"
+  endpoint: "http://traefik/"
   signer: "SAMJKTZVW5UOHCDK5INYJNORF2HRKYI72M5XSZCBYAHQHR34FFR4Z6G4"
 
 listener:
@@ -16,9 +16,10 @@ cop:
   service_port: 80
   service_prefix: /integrations/bridge
 
-withdraw:
+bridger:
   owner: "GBA4EX43M25UPV4WIE6RRMQOFTWXZZRIPFAI5VPY6Z2ZVVXVWZ6NEOOB"
   signer: "SAMJKTZVW5UOHCDK5INYJNORF2HRKYI72M5XSZCBYAHQHR34FFR4Z6G4"
+  contract_address: "0x8A6D4B2E3c7DA7bBAFCAC1e151279e2BA957b33a"
 
 signer:
   eth_signer: "75603080DAED3924A5544F6815688A2E94F07C89864BFB750D99A8F107B8E3E8"

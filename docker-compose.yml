@@ -148,7 +148,7 @@ services:
     entrypoint: ""
     command: /opt/config/apply.sh
   web_client:
-    image: registry.gitlab.com/tokend/blockparty/web-client:adb5af3b2a4ffb3f42ed27df3dc684fe6e3d4f79
+    image: registry.gitlab.com/tokend/blockparty/web-client:389cbe4d0f9f8f84e64dd8b24c690d024fd1ef90
     restart: unless-stopped
     labels:
       - "traefik.enabled=false"
@@ -179,7 +179,7 @@ services:
     volumes:
       - storage-data:/data
   nft-svc:
-    image: registry.gitlab.com/tokend/blockparty/nft-svc:148275b28e3f71cae605c11dd7b493cb1c97539a
+    image: registry.gitlab.com/tokend/blockparty/nft-svc:1.1.1-rc.0
     restart: unless-stopped
     entrypoint: sh -c "nft-svc migrate up && nft-svc run"
     depends_on:
@@ -297,60 +297,8 @@ services:
       - identity-data:/pgdata
 
   ## Ethereum
-  erc20-deposit:
-    image: registry.gitlab.com/tokend/docker-registry/erc20-deposit-svc:362f073aa4b6205f737cfbbed9473e72941d3ffc
-    labels:
-      - "traefik.enabled=false"
-    restart: unless-stopped
-    depends_on:
-      - horizon
-    environment:
-      - KV_VIPER_FILE=/config.yaml
-    volumes:
-      - ./configs/erc20-deposit.yaml:/config.yaml
-    entrypoint: "erc20-deposit-svc"
-    command: ["run", "deposit"]
-  erc20-deployer:
-    image: registry.gitlab.com/tokend/docker-registry/erc20-deposit-svc:362f073aa4b6205f737cfbbed9473e72941d3ffc
-    restart: on-failure
-    labels:
-      - "traefik.enabled=false"
-    depends_on:
-      - horizon
-    environment:
-      - KV_VIPER_FILE=/config.yaml
-    volumes:
-      - ./configs/erc20-deposit.yaml:/config.yaml
-    entrypoint: "erc20-deposit-svc"
-    command: ["run", "deployer"]
-  erc20-funnel:
-    image: registry.gitlab.com/tokend/docker-registry/erc20-deposit-svc:362f073aa4b6205f737cfbbed9473e72941d3ffc
-    restart: unless-stopped
-    labels:
-      - "traefik.enabled=false"
-    depends_on:
-      - horizon
-    environment:
-      - KV_VIPER_FILE=/config.yaml
-    volumes:
-      - ./configs/erc20-deposit.yaml:/config.yaml
-    entrypoint: "erc20-deposit-svc"
-    command: ["run", "funnel"]
-  erc20-withdraw:
-    image: tokend/erc20-withdraw-svc:1.0.6
-    restart: unless-stopped
-    labels:
-      - "traefik.enabled=false"
-    depends_on:
-      - horizon
-    environment:
-      - KV_VIPER_FILE=/config.yaml
-    volumes:
-      - ./configs/erc20-withdraw.yaml:/config.yaml
-    entrypoint: "erc20-withdraw-svc"
-    command: ["run", "withdraw"]
-  erc721-bridge:
-    image: registry.gitlab.com/tokend/blockparty/erc721-bridge-eth:1eede5be1c7128ddec4632e44bc83ca01d9cae33
+  bridge:
+    image: registry.gitlab.com/tokend/blockparty/erc721-bridge-eth:b0639c634dbd8678ec23e3115011226d7cde1ba1
     restart: unless-stopped
     depends_on:
       - horizon
