@@ -121,7 +121,7 @@ services:
     ports:
       - 8060:80
   admin_client:
-    image: tokend/admin-client:1.13.0
+    image: registry.gitlab.com/tokend/mlm/admin-panel-mlm:e0a581ca9e5983f9b1ce3e4120196a119ed8a4a7
     restart: unless-stopped
     volumes:
       - ./configs/client.js:/usr/share/nginx/html/static/env.js
