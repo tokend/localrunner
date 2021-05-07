@@ -202,7 +202,7 @@ services:
     volumes:
       - nft-data:/pgdata
   marketplace:
-    image: registry.gitlab.com/tokend/blockparty/marketplace-v2-svc:6afd37209e3a03ba2a2f419a4365c532695b4be1
+    image: registry.gitlab.com/tokend/blockparty/marketplace-v2-svc:40c8d1d77fdb440b9215cb59a247117097e39052
     restart: unless-stopped
     environment:
       - KV_VIPER_FILE=/config.yaml
@@ -211,7 +211,7 @@ services:
       - marketplace_db
     volumes:
       - ./configs/marketplace.yaml:/config.yaml
-    entrypoint: sh -c "marketplace-svc migrate up && marketplace-svc run"
+    entrypoint: sh -c "marketplace-v2-svc migrate up && marketplace-v2-svc run"
   marketplace_db:
     image: tokend/postgres-ubuntu:9.6
     labels:
