@@ -202,7 +202,7 @@ services:
     volumes:
       - nft-data:/pgdata
   marketplace:
-    image: registry.gitlab.com/tokend/blockparty/marketplace-svc:b43a472a6a61e40b49056961c89a71bf4edca2d5
+    image: registry.gitlab.com/tokend/blockparty/marketplace-v2-svc:6afd37209e3a03ba2a2f419a4365c532695b4be1
     restart: unless-stopped
     environment:
       - KV_VIPER_FILE=/config.yaml
@@ -224,29 +224,6 @@ services:
       - PGDATA=/pgdata
     volumes:
       - marketplace-data:/pgdata
-  auction:
-    image: registry.gitlab.com/tokend/blockparty/auction-svc:39f3e2891d15247be298e54ba65e2cd7bacfaa15
-    restart: unless-stopped
-    environment:
-      - KV_VIPER_FILE=/config.yaml
-    depends_on:
-      - horizon
-      - auction_db
-    volumes:
-      - ./configs/auction.yaml:/config.yaml
-    entrypoint: sh -c "auction-svc migrate up && auction-svc run"
-  auction_db:
-    image: tokend/postgres-ubuntu:9.6
-    labels:
-      - "traefik.enabled=false"
-    restart: unless-stopped
-    environment:
-      - POSTGRES_USER=auction
-      - POSTGRES_PASSWORD=auction
-      - POSTGRES_DB=auction
-      - PGDATA=/pgdata
-    volumes:
-      - auction-data:/pgdata
   dns:
     image: registry.gitlab.com/tokend/blockparty/dns-svc:0.5.3
     restart: unless-stopped

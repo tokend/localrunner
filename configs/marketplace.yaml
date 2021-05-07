@@ -33,6 +33,12 @@ coinpayments:
   ipn_secret: "supersekr1tandsecure"
   request_timeout: 30
 
+ethbidder:
+  checkpoint: 8882144
+  rpc: "wss://rinkeby.infura.io/ws/v3/575232417faf4efaa8f1d204e1fcab28"
+  contract_address: "0x27Ee70251f26836A95EEc019943Bf9750E442274"
+  eth_signer: "75603080DAED3924A5544F6815688A2E94F07C89864BFB750D99A8F107B8E3E8"
+
 oracle:
   asset: "ethereum"
   quote: "usd"
