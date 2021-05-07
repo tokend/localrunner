@@ -376,4 +376,3 @@ volumes:
   templates-data:
   notificator-data:
   stripe-data:
-  auction-data:
