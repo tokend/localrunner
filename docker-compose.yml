@@ -179,7 +179,7 @@ services:
     volumes:
       - storage-data:/data
   nft-svc:
-    image: registry.gitlab.com/tokend/blockparty/nft-svc:1.1.1-rc.0
+    image: registry.gitlab.com/tokend/blockparty/nft-svc:a729ed1c6081dc2e6f136020b5af1a37e9c3221e
     restart: unless-stopped
     entrypoint: sh -c "nft-svc migrate up && nft-svc run"
     depends_on:
@@ -202,7 +202,7 @@ services:
     volumes:
       - nft-data:/pgdata
   marketplace:
-    image: registry.gitlab.com/tokend/blockparty/marketplace-svc:b43a472a6a61e40b49056961c89a71bf4edca2d5
+    image: registry.gitlab.com/tokend/blockparty/marketplace-svc:0ff97af3cd8cc354ce6b0f0c685c8f6d6b6768d3
     restart: unless-stopped
     environment:
       - KV_VIPER_FILE=/config.yaml

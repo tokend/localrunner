@@ -17,6 +17,7 @@ marketplace:
   skip_sign_check: false
   tx_expiration_time: 1m
   prolongation_time: 15m
+  fee_percent: 15
 
 cop:
   endpoint: http://cop
