@@ -298,7 +298,7 @@ services:
 
   ## Ethereum
   bridge:
-    image: registry.gitlab.com/tokend/blockparty/erc721-bridge-eth:b0639c634dbd8678ec23e3115011226d7cde1ba1
+    image: registry.gitlab.com/tokend/blockparty/erc721-bridge-eth:f0ff0bd3e0d71dcde6b1364578e4ab60b539533f
     restart: unless-stopped
     depends_on:
       - horizon
