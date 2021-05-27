@@ -229,7 +229,7 @@ services:
     volumes:
       - details-data:/pgdata
   marketplace:
-    image: mymarket:latest
+    image: registry.gitlab.com/tokend/blockparty/marketplace-v2-svc:25be3d236ad162b0b74fd8eddcb58a6fddb7f2c2
     restart: unless-stopped
     environment:
       - KV_VIPER_FILE=/config.yaml
@@ -302,7 +302,7 @@ services:
 
   ## Ethereum
   bridge:
-    image: registry.gitlab.com/tokend/blockparty/erc721-bridge-eth:323652c42632cd945a96ddec5b8b64197793725f
+    image: registry.gitlab.com/tokend/blockparty/erc721-bridge-eth:cfc52b667c5764ae707071e2ef154d3e0db8aa18
     restart: unless-stopped
     depends_on:
       - horizon
@@ -313,7 +313,7 @@ services:
     entrypoint: "erc721-bridge-eth"
     command: ["run"]
   stripe:
-    image: registry.gitlab.com/tokend/blockparty/stripe-svc:72b5c35ae8949e1ab445a03b3539d43154070fc5
+    image: registry.gitlab.com/tokend/blockparty/stripe-svc:67d22b89195530d267fd2f69db3829b1ab47332e
     restart: unless-stopped
     volumes:
       - ./configs/stripe.yaml:/config.yaml
