@@ -36,7 +36,7 @@ coinpayments:
 ethbidder:
   checkpoint: 8882144
   rpc: "wss://rinkeby.infura.io/ws/v3/575232417faf4efaa8f1d204e1fcab28"
-  contract_address: "0x27Ee70251f26836A95EEc019943Bf9750E442274"
+  contract_address: "0x2Adde1E6e6c6da6F936F35d0c79F76a20F0c7716"
   eth_signer: "75603080DAED3924A5544F6815688A2E94F07C89864BFB750D99A8F107B8E3E8"
 
 oracle:
@@ -46,7 +46,7 @@ oracle:
 coinpayer:
   checkpoint: 8882144
   rpc: "wss://rinkeby.infura.io/ws/v3/575232417faf4efaa8f1d204e1fcab28"
-  contract_address: "0xFd624E993d54299F50C8F45aBedC2aac47828979"
+  contract_address: "0xd4ed63b8b0De27fF6CcF140C0067941593a2Fae4"
   eth_signer: "75603080DAED3924A5544F6815688A2E94F07C89864BFB750D99A8F107B8E3E8"
 
 4bill:

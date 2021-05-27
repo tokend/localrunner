@@ -8,5 +8,7 @@ document.ENV = {
     IPFS_HOST: 'ipfs.infura.io',
     TOKEN_URI_HOST: 'gateway.ipfs.io/ipfs/',
     IPFS_PORT: '5001',
-    IPFS_PROTOCOL: 'https'
+    IPFS_PROTOCOL: 'https',
+    ERC721_CONTRACT_ADDRESS: "0x580Da36625bA6c5c3e40B511E84B276b2A668d04",
+    ERC721_BRIDGE_ADDRESS: "0x74ff9a825c3b172b93A12c7e80F09757e280DeE6",
 }
