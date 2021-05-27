@@ -179,7 +179,7 @@ services:
     volumes:
       - storage-data:/data
   nft-svc:
-    image: registry.gitlab.com/tokend/blockparty/nft-svc:1.1.1-rc.0
+    image: registry.gitlab.com/tokend/blockparty/nft-svc:5f38bb90be8b54c2e50bcd7859d32813903060ee
     restart: unless-stopped
     entrypoint: sh -c "nft-svc migrate up && nft-svc run"
     depends_on:
@@ -202,7 +202,7 @@ services:
     volumes:
       - nft-data:/pgdata
   marketplace:
-    image: registry.gitlab.com/tokend/blockparty/marketplace-v2-svc:b8f481499a54c56ffec806eaf2d38f3b76eca2f4
+    image: registry.gitlab.com/tokend/blockparty/marketplace-v2-svc:f9374d8e1109ab8509d59fc9e62ef65009692540
     restart: unless-stopped
     environment:
       - KV_VIPER_FILE=/config.yaml
@@ -298,7 +298,7 @@ services:
 
   ## Ethereum
   bridge:
-    image: registry.gitlab.com/tokend/blockparty/erc721-bridge-eth:b0639c634dbd8678ec23e3115011226d7cde1ba1
+    image: registry.gitlab.com/tokend/blockparty/erc721-bridge-eth:cfc52b667c5764ae707071e2ef154d3e0db8aa18
     restart: unless-stopped
     depends_on:
       - horizon
@@ -309,7 +309,7 @@ services:
     entrypoint: "erc721-bridge-eth"
     command: ["run"]
   stripe:
-    image: registry.gitlab.com/tokend/blockparty/stripe-svc:fd3138019dcc5e248190137c32976656ed3d7c5a
+    image: registry.gitlab.com/tokend/blockparty/stripe-svc:67d22b89195530d267fd2f69db3829b1ab47332e
     restart: unless-stopped
     volumes:
       - ./configs/stripe.yaml:/config.yaml
