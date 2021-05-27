@@ -1,0 +1,44 @@
+incomer:
+  capacity:                              5
+
+pool:
+  capacity:                              2
+
+db:
+  url: postgres://details:details@details_db/details?sslmode=disable
+
+s3:
+  aws_region: us-east-1
+  bucket: tokens
+  endpoint: docker-host:9000
+  disable_ssl: true
+  access_key_id: "miniominio"
+  secret_key: "sekritsekrit"
+  ensure_bucket: true
+
+nft:
+  endpoint: http://nft-svc
+  signer: SAMJKTZVW5UOHCDK5INYJNORF2HRKYI72M5XSZCBYAHQHR34FFR4Z6G4
+
+ipfs:
+  timeout: 1m
+
+horizon:
+  endpoint: http://traefik
+  signer: SAMJKTZVW5UOHCDK5INYJNORF2HRKYI72M5XSZCBYAHQHR34FFR4Z6G4
+
+details:
+  format: "https://etherscan.io/token/0x2Fb704d243cFA179fFaD4D87AcB1D36bcf243a44?a=%s"
+
+cop:
+  endpoint: http://cop
+  upstream: http://details-updater
+  service_name: details-updater
+  service_port: 80
+
+listener:
+  addr:                                  :80
+
+log:
+  level: info
+  disable_sentry: true

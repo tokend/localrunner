@@ -212,6 +212,29 @@ services:
     volumes:
       - ./configs/marketplace.yaml:/config.yaml
     entrypoint: sh -c "marketplace-v2-svc migrate up && marketplace-v2-svc run"
+  details:
+    image: mydetails:latest
+    restart: unless-stopped
+    entrypoint: sh -c "details-updater migrate up && details-updater run"
+    depends_on:
+      - horizon
+      - details_db
+    environment:
+      - KV_VIPER_FILE=/config.yaml
+    volumes:
+      - ./configs/details.yaml:/config.yaml
+  details_db:
+    image: tokend/postgres-ubuntu:9.6
+    restart: unless-stopped
+    labels:
+      - "traefik.enabled=false"
+    environment:
+      - POSTGRES_USER=details
+      - POSTGRES_PASSWORD=details
+      - POSTGRES_DB=details
+      - PGDATA=/pgdata
+    volumes:
+      - details-data:/pgdata
   marketplace_db:
     image: tokend/postgres-ubuntu:9.6
     labels:
