@@ -1,6 +1,6 @@
 rpc:
   endpoint: "wss://rinkeby.infura.io/ws/v3/0bab5f96a5e946b1a6403fd303526019"
-  start_point: 8324100
+  start_point: 8762084
 
 horizon:
   endpoint: "http://traefik/"
@@ -19,7 +19,7 @@ cop:
 bridger:
   owner: "GBA4EX43M25UPV4WIE6RRMQOFTWXZZRIPFAI5VPY6Z2ZVVXVWZ6NEOOB"
   signer: "SAMJKTZVW5UOHCDK5INYJNORF2HRKYI72M5XSZCBYAHQHR34FFR4Z6G4"
-  contract_address: "0x2e4A89039d8f400756449D8885b2df0Ad0D21be0"
+  contract_address: "0x162f7dd4C1E850F408a679481535857842295B17"
   asset_address: "0x580Da36625bA6c5c3e40B511E84B276b2A668d04"
 
 signer:

@@ -1,0 +1,26 @@
+# YOU MUST SPECIFY KV_VIPER_FILE
+# export KV_VIPER_FILE=./example.config.yaml
+
+log:
+  level: info # log level
+  disable_sentry: true   # if we disable sentry
+
+deployer:
+  gas_price: 10
+  gas_limit: 30000
+  endpoint: "https://rinkeby.infura.io/v3/4ef717a20e7a43ecabe5def65f3a2432"
+  private_key: "0ab0879dd0923db98b440b3f6bfdb2f34b345b6fe70bb2e0cc75b00c9e639bbd"
+
+# add here constants of contracts
+pipelines:
+  bridge:
+    hot_wallet: "0x9266798B4469275e844C94f747b4e35Dc6aD8D77"
+    erc721_address: "0x580Da36625bA6c5c3e40B511E84B276b2A668d04"
+
+  coinpayer:
+    hot_wallet: "0x9266798B4469275e844C94f747b4e35Dc6aD8D77"
+    fee: 5
+
+  auction:
+    hot_wallet: "0x9266798B4469275e844C94f747b4e35Dc6aD8D77"
+    fee: 5

@@ -16,6 +16,7 @@ marketplace:
   payment_signer: "SAMJKTZVW5UOHCDK5INYJNORF2HRKYI72M5XSZCBYAHQHR34FFR4Z6G4"
   skip_sign_check: false
   tx_expiration_time: 1m
+  tx_prolongation_time: 1m
   prolongation_time: 15m
   fee_percent: 15
 
@@ -41,7 +42,7 @@ oracle:
 coinpayer:
   checkpoint: 8882144
   rpc: "wss://rinkeby.infura.io/ws/v3/575232417faf4efaa8f1d204e1fcab28"
-  contract_address: "0xafB7D9557f3849BB7792AB164B33285ea7CA0669"
+  contract_address: "0x316494e76e264c35Ae9391093824A348eD3bBb95"
   eth_signer: "75603080DAED3924A5544F6815688A2E94F07C89864BFB750D99A8F107B8E3E8"
 
 4bill:
@@ -75,3 +76,13 @@ discounter:
   - lower_limit: 10
     upper_limit: 100
     percent: 20
+
+ethbidder:
+  checkpoint: 8882144
+  rpc: "wss://rinkeby.infura.io/ws/v3/575232417faf4efaa8f1d204e1fcab28"
+  contract_address: "0x9838DceFd0CfA0aE37a2B9d6E508F81f6b030855"
+  eth_signer: "75603080DAED3924A5544F6815688A2E94F07C89864BFB750D99A8F107B8E3E8"
+
+oracle:
+  asset: "ethereum"
+  quote: "usd"

@@ -202,7 +202,7 @@ services:
     volumes:
       - nft-data:/pgdata
   marketplace:
-    image: registry.gitlab.com/tokend/blockparty/marketplace-svc:0ff97af3cd8cc354ce6b0f0c685c8f6d6b6768d3
+    image: registry.gitlab.com/tokend/blockparty/marketplace-v2-svc:a10d9236db2dda0a21a85e8a17498b3d41df860c
     restart: unless-stopped
     environment:
       - KV_VIPER_FILE=/config.yaml
@@ -211,7 +211,7 @@ services:
       - marketplace_db
     volumes:
       - ./configs/marketplace.yaml:/config.yaml
-    entrypoint: sh -c "marketplace-svc migrate up && marketplace-svc run"
+    entrypoint: sh -c "marketplace-v2-svc migrate up && marketplace-v2-svc run"
   marketplace_db:
     image: tokend/postgres-ubuntu:9.6
     labels:
@@ -224,29 +224,6 @@ services:
       - PGDATA=/pgdata
     volumes:
       - marketplace-data:/pgdata
-  auction:
-    image: registry.gitlab.com/tokend/blockparty/auction-svc:39f3e2891d15247be298e54ba65e2cd7bacfaa15
-    restart: unless-stopped
-    environment:
-      - KV_VIPER_FILE=/config.yaml
-    depends_on:
-      - horizon
-      - auction_db
-    volumes:
-      - ./configs/auction.yaml:/config.yaml
-    entrypoint: sh -c "auction-svc migrate up && auction-svc run"
-  auction_db:
-    image: tokend/postgres-ubuntu:9.6
-    labels:
-      - "traefik.enabled=false"
-    restart: unless-stopped
-    environment:
-      - POSTGRES_USER=auction
-      - POSTGRES_PASSWORD=auction
-      - POSTGRES_DB=auction
-      - PGDATA=/pgdata
-    volumes:
-      - auction-data:/pgdata
   dns:
     image: registry.gitlab.com/tokend/blockparty/dns-svc:0.5.3
     restart: unless-stopped
@@ -298,7 +275,7 @@ services:
 
   ## Ethereum
   bridge:
-    image: registry.gitlab.com/tokend/blockparty/erc721-bridge-eth:f0ff0bd3e0d71dcde6b1364578e4ab60b539533f
+    image: registry.gitlab.com/tokend/blockparty/erc721-bridge-eth:ca735f01cbcba36e9f438be45ac9c62d10072cc1
     restart: unless-stopped
     depends_on:
       - horizon
@@ -385,6 +362,14 @@ services:
       - PGDATA=/pgdata
     volumes:
       - stripe-data:/pgdata
+  deployer:
+    image: registry.gitlab.com/tokend/blockparty/contract-deployer:1.0.0
+    entrypoint: contract-deployer run
+    environment:
+      - KV_VIPER_FILE=/config.yaml
+    volumes:
+      - /var/run/docker.sock:/var/run/docker.sock:ro
+      - ./config.yaml:/config.yaml
 volumes:
   identity-data:
   adks-data:
