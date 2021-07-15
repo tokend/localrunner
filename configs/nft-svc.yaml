@@ -29,5 +29,4 @@ cop:
   upstream: http://nft-svc
   service_name: "nft-svc"
   service_port: "80"
-  service_prefix: "/tokens"
 
