@@ -16,7 +16,7 @@ marketplace:
   payment_signer: "SAMJKTZVW5UOHCDK5INYJNORF2HRKYI72M5XSZCBYAHQHR34FFR4Z6G4"
   skip_sign_check: false
   tx_expiration_time: 1m
-  tx_prolongation_time: 1m
+  tx_prolongation_time: 13m
   prolongation_time: 15m
   fee_percent: 15
 
