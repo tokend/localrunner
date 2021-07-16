@@ -16,9 +16,8 @@ marketplace:
   payment_signer: "SAMJKTZVW5UOHCDK5INYJNORF2HRKYI72M5XSZCBYAHQHR34FFR4Z6G4"
   skip_sign_check: false
   tx_expiration_time: 1m
-  tx_prolongation_time: 13m
+  tx_prolongation_time: 1m
   prolongation_time: 15m
-  fee_percent: 15
 
 cop:
   endpoint: http://cop
@@ -35,6 +34,12 @@ coinpayments:
   ipn_secret: "supersekr1tandsecure"
   request_timeout: 30
 
+ethbidder:
+  checkpoint: 8882144
+  rpc: "wss://rinkeby.infura.io/ws/v3/575232417faf4efaa8f1d204e1fcab28"
+  contract_address: "0x9724A421C842f16A05F5399590f1C5b307cF49A3"
+  eth_signer: "75603080DAED3924A5544F6815688A2E94F07C89864BFB750D99A8F107B8E3E8"
+
 oracle:
   asset: "ethereum"
   quote: "usd"
@@ -42,7 +47,7 @@ oracle:
 coinpayer:
   checkpoint: 8882144
   rpc: "wss://rinkeby.infura.io/ws/v3/575232417faf4efaa8f1d204e1fcab28"
-  contract_address: "0xE3C2Ef10EFDB057c6d913E7CB6dc275043A644ab"
+  contract_address: "0xBb91A890D5Bc4736948a55aE7F8645B49bd06CA8"
   eth_signer: "75603080DAED3924A5544F6815688A2E94F07C89864BFB750D99A8F107B8E3E8"
 
 4bill:
@@ -76,13 +81,3 @@ discounter:
   - lower_limit: 10
     upper_limit: 100
     percent: 20
-
-ethbidder:
-  checkpoint: 8882144
-  rpc: "wss://rinkeby.infura.io/ws/v3/575232417faf4efaa8f1d204e1fcab28"
-  contract_address: "0x7485315d56E839B96f387c25DAe741c0Ac60251D"
-  eth_signer: "75603080DAED3924A5544F6815688A2E94F07C89864BFB750D99A8F107B8E3E8"
-
-oracle:
-  asset: "ethereum"
-  quote: "usd"
