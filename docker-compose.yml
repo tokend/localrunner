@@ -193,30 +193,30 @@ services:
       - ./configs/erc20-bridge.yaml:/config.yaml
     entrypoint: "erc20-bridge"
     command: ["run", "withdraw"]
-coinpayments-deposit:
-  image: tokend/coinpayments:0.5.0
-  restart: unless-stopped
-  environment:
-    - KV_VIPER_FILE=/config.yaml
-  volumes:
-    - ./configs/coinpayments-deposit.yaml:/config.yaml
-  command: deposit
-coinpayments-deposit-verify:
-  image: tokend/coinpayments:0.5.0
-  restart: unless-stopped
-  environment:
-    - KV_VIPER_FILE=/config.yaml
-  volumes:
-    - ./configs/coinpayments-deposit-verify.yaml:/config.yaml
-  command: deposit-verify
-coinpayments-withdraw:
-  image: tokend/coinpayments:0.5.0
-  restart: unless-stopped
-  environment:
-    - KV_VIPER_FILE=/config.yaml
-  volumes:
-    - ./configs/coinpayments-withdraw.yaml:/config.yaml
-  command: withdraw
+  coinpayments-deposit:
+    image: tokend/coinpayments:0.5.0
+    restart: unless-stopped
+    environment:
+      - KV_VIPER_FILE=/config.yaml
+    volumes:
+      - ./configs/coinpayments-deposit.yaml:/config.yaml
+    command: deposit
+  coinpayments-deposit-verify:
+    image: tokend/coinpayments:0.5.0
+    restart: unless-stopped
+    environment:
+      - KV_VIPER_FILE=/config.yaml
+    volumes:
+      - ./configs/coinpayments-deposit-verify.yaml:/config.yaml
+    command: deposit-verify
+  coinpayments-withdraw:
+    image: tokend/coinpayments:0.5.0
+    restart: unless-stopped
+    environment:
+      - KV_VIPER_FILE=/config.yaml
+    volumes:
+      - ./configs/coinpayments-withdraw.yaml:/config.yaml
+    command: withdraw
 
 volumes:
   adks-data:
